@@ -1,15 +1,29 @@
+/* See LICENSE file for copyright and license details. */
+#include <X11/XF86keysym.h>
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int snap      = 15;       /* snap pixel */
-static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "terminus:size=9" };
-static const char dmenufont[]       = "terminus:size=9";
-static const char col_gray1[]       = "#000000";
-static const char col_gray2[]       = "#AAAAAA";
-static const char col_gray3[]       = "#ffffff";
-static const char col_gray4[]       = "#ffffff";
-static const char col_cyan[]        = "#000000";
+static const unsigned int snap      = 32;       /* snap pixel */
+static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static const unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
+static const unsigned int systrayspacing = 2;   /* systray spacing */
+static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
+static const int showsystray        = 1;     /* 0 means no systray */
+static const int showbar            = 1;     /* 0 means no bar */
+static const int topbar             = 1;     /* 0 means bottom bar */
+/* static const char *fonts[]          = { "terminus:size=10" }; */
+/* static const char dmenufont[]       = "terminus:size=10"; */
+/* static const char col_gray1[]       = "#000000"; */
+/* static const char col_gray2[]       = "#AAAAAA"; */
+/* static const char col_gray3[]       = "#ffffff"; */
+/* static const char col_gray4[]       = "#ffffff"; */
+/* static const char col_cyan[]        = "#000000"; */
+static const char *fonts[]          = { "monospace:size=10" };
+static const char dmenufont[]       = "monospace:size=10";
+static const char col_gray1[]       = "#222222";
+static const char col_gray2[]       = "#444444";
+static const char col_gray3[]       = "#bbbbbb";
+static const char col_gray4[]       = "#eeeeee";
+static const char col_cyan[]        = "#005577";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -26,16 +40,27 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Kdenlive", NULL,       NULL,       0,            1,           -1 },
-	{ "gmrun",    NULL,       NULL,       0,            1,           -1 },
-	{ "mpv",      NULL,       NULL,       0,            1,           -1 },
-	{ "sxiv",     NULL,  	  NULL,	      0, 	    1, 		 -1 },
+	{ "Pavucontrol",     NULL,       NULL,       0,            1,           -1 },
+	{ "Transmission-gtk",     NULL,       NULL,       0,            1,           -1 },
+	{ "Xfce4-appfinder",     NULL,       NULL,       0,            1,           -1 },
+	{ "TelegramDesktop",     NULL,       NULL,       0,            1,           -1 },
+	{ "Galculator",     NULL,       NULL,       0,            1,           -1 },
+	{ "Gnome-calendar",     NULL,       NULL,       0,            1,           -1 },
+	{ "Blueman-manager",     NULL,       NULL,       0,            1,           -1 },
+	{ "GParted",     NULL,       NULL,       0,            1,           -1 },
+	{ "Cheese",     NULL,       NULL,       0,            1,           -1 },
+	{ "XTerm",     NULL,       NULL,       0,            1,           -1 },
+	{ "Steam",     NULL,       NULL,       0,            1,           -1 },
+	{ "zoom",     NULL,       NULL,       0,            1,           -1 },
+	{ "Software-properties-gtk",     NULL,       NULL,       0,            1,           -1 },
+	{ "Lightdm-gtk-greeter-settings",     NULL,       NULL,       0,            1,           -1 },
 };
 
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -46,7 +71,6 @@ static const Layout layouts[] = {
 
 /* key definitions */
 #define MODKEY Mod1Mask
-#define SUPERKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -59,32 +83,59 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "xterm", NULL };
-static const char *drawterm[]  = { "/home/diamond/bin/drawterm", NULL };
-static const char *files[] = { "thunar", NULL };
-static const char *firefox[]  = { "firefox", NULL };
+static const char *findercmd[]  = { "xfce4-appfinder", NULL };
+static const char *roficmd[]  = { "rofi", "-combi-modi","window,drun","-show", "combi", NULL };
+static const char *termcmd[]  = { "xfce4-terminal", NULL };
+static const char *xterm[]  = { "xterm", NULL };
+static const char *web[] = { "firefox", NULL };
+static const char *shot[] = { "xfce4-screenshooter", "-f", NULL };
+static const char *winshot[] = { "xfce4-screenshooter", "-w", NULL };
+static const char *selshot[] = { "xfce4-screenshooter", "-r", NULL };
+static const char *explorer[] = { "thunar", NULL };
+static const char *emacs[] = { "emacsclient", "-c","-n","-a","'emacs'", NULL };
 static const char *mixer[] = { "pavucontrol", NULL };
-static const char *tray[] = { "/home/diamond/bin/dwm_tray", NULL };
-static const char *mpv[] = { "/home/diamond/bin/mediaplayer", NULL };
-static const char *finder[] = { "xfce4-appfinder", NULL };
-static const char *gmruncmd[]  = { "gmrun", NULL };
-static const char *music[] = { "/home/diamond/bin/musicplayer", NULL };
-static const char *windowcenter[] = { "/home/diamond/bin/windowcenter", NULL };
+static const char *calc[] = { "galculator", NULL };
+static const char *mpv[] = { "mpv", "--player-operation-mode=pseudo-gui", NULL };
+static const char *music[] = { "sh", "/home/diamond/bin/startmusic", NULL };
+static const char *launcher[] = { "sh", "/home/diamond/bin/launcher.sh", NULL };
+static const char *statuscmd[] = { "sh", "/home/diamond/bin/statf", NULL };
+static const char *xkill[] = { "xkill", NULL };
+
+/* Volume and brightness binds */
+static const char *volup[] = { "pactl", "set-sink-volume", "0", "+5%", NULL };
+static const char *voldown[] = { "pactl", "set-sink-volume", "0", "-5%", NULL };
+static const char *volmute[] = { "pactl", "set-sink-mute", "0", "toggle", NULL };
+static const char *brup[] = { "sudo", "brightnessctl", "set", "5%+", NULL };
+static const char *brdown[] = { "sudo", "brightnessctl", "set", "5%-", NULL };
+
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,			XK_w,	   spawn,	   {.v = firefox } },
-	{ MODKEY|ControlMask,		XK_t,	   spawn,	   {.v = drawterm } },
-	{ MODKEY,			XK_e,	   spawn,	   {.v = files } },
-	{ MODKEY|ControlMask,		XK_p,	   spawn,	   {.v = mixer } },
-	{ SUPERKEY,			XK_v,	   spawn,	   {.v = mpv } },
-	{ SUPERKEY,			XK_m,	   spawn,	   {.v = music } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY|ShiftMask,		XK_g,	   spawn,	   {.v = tray } },
-	{ SUPERKEY,			XK_r,	   spawn,	   {.v = finder } },
-	{ MODKEY,			XK_F2,	   spawn,	   {.v = gmruncmd } },
-	{ SUPERKEY,			XK_c,	   spawn,	   {.v = windowcenter } },
+	{ MODKEY|ControlMask,           XK_t,	   spawn,          {.v = xterm } },
+	{ MODKEY,						XK_w,	   spawn,	   	   {.v = web } },
+	{ 0,							XK_Print,  spawn,	   	   {.v = shot } },
+	{ MODKEY,						XK_Print,  spawn,	   	   {.v = winshot } },
+	{ MODKEY|ShiftMask,				XK_Print,  spawn,	   	   {.v = selshot } },
+	{ MODKEY,						XK_e,      spawn,	  	   {.v = explorer } },
+	{ Mod4Mask,						XK_e,      spawn,	  	   {.v = emacs } },
+	{ Mod4Mask,						XK_space,  spawn,	  	   {.v = roficmd } },
+	{ Mod4Mask,						XK_m,      spawn,	  	   {.v = music } },
+	{ Mod4Mask,						XK_v,      spawn,	  	   {.v = mpv } },
+	{ Mod4Mask,						XK_g,      spawn,	  	   {.v = calc } },
+	{ MODKEY,						XK_F3,     spawn,	  	   {.v = findercmd } },
+	{ MODKEY|ControlMask,			XK_p,	   spawn,	  	   {.v = mixer } },
+	{ Mod4Mask,						XK_x,      spawn,	  	   {.v = launcher } },
+	{ MODKEY|ShiftMask,				XK_f,      spawn,	  	   {.v = statuscmd } },
+	{ MODKEY|ShiftMask,				XK_x,      spawn,	  	   {.v = xkill } },
+	{ MODKEY|ControlMask,           XK_Right,  shiftview,  { .i = +1 } },
+	{ MODKEY|ControlMask,           XK_Left,   shiftview,  { .i = -1 } },
+	{ 0, 							XF86XK_AudioRaiseVolume,   spawn, 	   	{.v = volup} },
+	{ 0, 							XF86XK_AudioLowerVolume,   spawn, 	   	{.v = voldown} },
+	{ 0, 							XF86XK_AudioMute,	   	   spawn, 	   	{.v = volmute} },
+	{ 0, 							XF86XK_MonBrightnessUp,    spawn, 	   	{.v = brup} },
+	{ 0, 							XF86XK_MonBrightnessDown,  spawn, 	  	{.v = brdown} },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -98,7 +149,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_space,  setlayout,      {0} },
+	{ Mod1Mask,		        		XK_F4,     killclient,     {0} },
+	{ MODKEY,						XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
@@ -115,7 +167,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {0} },
+	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 };
 
 /* button definitions */
