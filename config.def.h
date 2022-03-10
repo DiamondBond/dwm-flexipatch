@@ -100,6 +100,7 @@ static const char *music[] = { "sh", "/home/diamond/bin/startmusic", NULL };
 static const char *launcher[] = { "sh", "/home/diamond/bin/launcher.sh", NULL };
 static const char *statuscmd[] = { "sh", "/home/diamond/bin/statf", NULL };
 static const char *xkill[] = { "xkill", NULL };
+static const char *slockcmd[] = { "slock", NULL };
 
 /* Volume and brightness binds */
 static const char *volup[] = { "pactl", "set-sink-volume", "0", "+5%", NULL };
@@ -118,6 +119,7 @@ static Key keys[] = {
 	{ 0,							XK_Print,  spawn,	   	   {.v = shot } },
 	{ MODKEY,						XK_Print,  spawn,	   	   {.v = winshot } },
 	{ MODKEY|ShiftMask,				XK_Print,  spawn,	   	   {.v = selshot } },
+	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = slockcmd } },
 	{ MODKEY,						XK_e,      spawn,	  	   {.v = explorer } },
 	{ Mod4Mask,						XK_e,      spawn,	  	   {.v = emacs } },
 	{ Mod4Mask,						XK_space,  spawn,	  	   {.v = roficmd } },
