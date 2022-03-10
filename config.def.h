@@ -101,6 +101,7 @@ static const char *launcher[] = { "sh", "/home/diamond/bin/launcher.sh", NULL };
 static const char *statuscmd[] = { "sh", "/home/diamond/bin/statf", NULL };
 static const char *xkill[] = { "xkill", NULL };
 static const char *slockcmd[] = { "slock", NULL };
+static const char *exitdwm[] = { "sh","/home/diamond/bin/exitdwm", NULL };
 
 /* Volume and brightness binds */
 static const char *volup[] = { "pactl", "set-sink-volume", "0", "+5%", NULL };
@@ -118,7 +119,7 @@ static Key keys[] = {
 	{ MODKEY,						XK_w,	   spawn,	   	   {.v = web } },
 	{ 0,							XK_Print,  spawn,	   	   {.v = shot } },
 	{ MODKEY,						XK_Print,  spawn,	   	   {.v = winshot } },
-	{ MODKEY|ShiftMask,				XK_Print,  spawn,	   	   {.v = selshot } },
+	{ ShiftMask,	                XK_Print,  spawn,	   	   {.v = selshot } },
 	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = slockcmd } },
 	{ MODKEY,						XK_e,      spawn,	  	   {.v = explorer } },
 	{ Mod4Mask,						XK_e,      spawn,	  	   {.v = emacs } },
@@ -131,6 +132,7 @@ static Key keys[] = {
 	{ Mod4Mask,						XK_x,      spawn,	  	   {.v = launcher } },
 	{ MODKEY|ShiftMask,				XK_f,      spawn,	  	   {.v = statuscmd } },
 	{ MODKEY|ShiftMask,				XK_x,      spawn,	  	   {.v = xkill } },
+	{ MODKEY|ControlMask|ShiftMask, XK_q,      spawn,          {.v = exitdwm } },
 	{ MODKEY|ControlMask,           XK_Right,  shiftview,  { .i = +1 } },
 	{ MODKEY|ControlMask,           XK_Left,   shiftview,  { .i = -1 } },
 	{ 0, 							XF86XK_AudioRaiseVolume,   spawn, 	   	{.v = volup} },
