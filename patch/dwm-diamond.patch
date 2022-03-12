@@ -1,0 +1,143 @@
+diff --git a/config.h b/config.h
+index f9abe6b..769a32a 100644
+--- a/config.h
++++ b/config.h
+@@ -1,4 +1,5 @@
+ /* See LICENSE file for copyright and license details. */
++#include <X11/XF86keysym.h>
+ 
+ /* appearance */
+ static const unsigned int borderpx       = 1;   /* border pixel of windows */
+@@ -77,8 +78,25 @@ static char *colors[][ColCount] = {
+ 
+ 
+ static const char *const autostart[] = {
+-	"st", NULL,
+-	NULL /* terminate */
++	"sh", "-c", "/home/diamond/bin/setenv.sh", NULL,
++	"xset", "b", "off", NULL,
++	"sh", "-c", "/home/diamond/bin/disable_touchscreen.sh", NULL,
++	"xrdb", "/home/diamond/.Xresources", NULL,
++	"sh", "-c", "while :; do dwmstatus.sh -; sleep 60; done", NULL,
++	"sh", "-c", "/home/diamond/bin/dwmcompton", NULL,
++	"pactl", "set-default-sink", "0", NULL,
++	"lxpolkit", NULL,
++	"dunst", NULL,
++	"xss-lock", "slock", NULL,
++	"xfce4-power-manager", NULL,
++	"libinput-gestures", NULL,
++	"nm-applet", NULL,
++	"blueman-applet", NULL,
++	"volumeicon", NULL,
++	"matebook-applet", NULL,
++	"emacs", "--daemon", NULL,
++	"dropbox", "start", "-i", NULL,
++	NULL
+ };
+ 
+ 
+@@ -145,8 +163,24 @@ static const Rule rules[] = {
+ 	RULE(.wintype = WTYPE "UTILITY", .isfloating = 1)
+ 	RULE(.wintype = WTYPE "TOOLBAR", .isfloating = 1)
+ 	RULE(.wintype = WTYPE "SPLASH", .isfloating = 1)
+-	RULE(.class = "Gimp", .tags = 1 << 4)
+-	RULE(.class = "Firefox", .tags = 1 << 7)
++	RULE(.class = "Gimp", .isfloating = 1)
++	RULE(.class = "Pavucontrol", .isfloating = 1)
++	RULE(.title = "Library", .isfloating = 1)
++	/* RULE(.class = "Places", .isfloating = 1) */
++	RULE(.class = "Transmission-gtk", .isfloating = 1)
++	RULE(.class = "Xfce4-appfinder", .isfloating = 1)
++	RULE(.class = "TelegramDesktop", .isfloating = 1)
++	RULE(.class = "Galculator", .isfloating = 1)
++	RULE(.class = "Gpick", .isfloating = 1)
++	RULE(.class = "Gnome-calendar", .isfloating = 1)
++	RULE(.class = "Blueman-manager", .isfloating = 1)
++	RULE(.class = "Gparted", .isfloating = 1)
++	RULE(.class = "Cheese", .isfloating = 1)
++	RULE(.class = "XTerm", .isfloating = 1)
++	RULE(.class = "Steam", .isfloating = 1)
++	RULE(.class = "zoom", .isfloating = 1)
++	RULE(.class = "Software-properties-gtk", .isfloating = 1)
++	RULE(.class = "Lightdm-gtk-greeter-settings", .isfloating = 1)
+ };
+ 
+ 
+@@ -214,8 +248,33 @@ static const char *dmenucmd[] = {
+ 	"-sf", selfgcolor,
+ 	NULL
+ };
+-static const char *termcmd[]  = { "st", NULL };
+-
++/* static const char *termcmd[]  = { "st", NULL }; */
++static const char *roficmd[]  = { "rofi", "-combi-modi","window,drun","-show", "combi", NULL };
++static const char *termcmd[]  = { "xfce4-terminal", NULL };
++static const char *findercmd[]  = { "xfce4-appfinder", NULL };
++static const char *xterm[]  = { "xterm", NULL };
++static const char *web[] = { "firefox", NULL };
++static const char *shot[] = { "xfce4-screenshooter", "-f", NULL };
++static const char *winshot[] = { "xfce4-screenshooter", "-w", NULL };
++static const char *selshot[] = { "xfce4-screenshooter", "-r", NULL };
++static const char *explorer[] = { "thunar", NULL };
++static const char *emacs[] = { "emacsclient", "-c","-n","-a","'emacs'", NULL };
++static const char *mixer[] = { "pavucontrol", NULL };
++static const char *calc[] = { "galculator", NULL };
++static const char *mpv[] = { "mpv", "--player-operation-mode=pseudo-gui", NULL };
++static const char *music[] = { "sh", "/home/diamond/bin/startmusic", NULL };
++static const char *launcher[] = { "sh", "/home/diamond/bin/launcher.sh", NULL };
++static const char *statuscmd[] = { "sh", "/home/diamond/bin/statf", NULL };
++/* static const char *exitdwm[] = { "sh", "/home/diamond/bin/exitdwm", NULL }; */
++static const char *xkill[] = { "xkill", NULL };
++static const char *slockcmd[] = { "slock", NULL };
++
++/* Volume and brightness binds */
++static const char *volup[] = { "pactl", "set-sink-volume", "0", "+5%", NULL };
++static const char *voldown[] = { "pactl", "set-sink-volume", "0", "-5%", NULL };
++static const char *volmute[] = { "pactl", "set-sink-mute", "0", "toggle", NULL };
++static const char *brup[] = { "sudo", "brightnessctl", "set", "5%+", NULL };
++static const char *brdown[] = { "sudo", "brightnessctl", "set", "5%-", NULL };
+ 
+ 
+ static Key keys[] = {
+@@ -223,6 +282,30 @@ static Key keys[] = {
+ 	{ MODKEY,                       XK_p,          spawn,                  {.v = dmenucmd } },
+ 	{ MODKEY|ShiftMask,             XK_Return,     spawn,                  {.v = termcmd } },
+ 	{ MODKEY,                       XK_b,          togglebar,              {0} },
++	{ MODKEY|ControlMask,           XK_t,	   spawn,          {.v = xterm } },
++	{ MODKEY,						XK_w,	   spawn,	   	   {.v = web } },
++	{ 0,							XK_Print,  spawn,	   	   {.v = shot } },
++	{ MODKEY,						XK_Print,  spawn,	   	   {.v = winshot } },
++	{ ShiftMask,	                XK_Print,  spawn,	   	   {.v = selshot } },
++	{ MODKEY|ControlMask,           XK_l,      spawn,          {.v = slockcmd } },
++	{ MODKEY,						XK_e,      spawn,	  	   {.v = explorer } },
++	{ Mod4Mask,						XK_e,      spawn,	  	   {.v = emacs } },
++	{ Mod4Mask,						XK_space,  spawn,	  	   {.v = roficmd } },
++	{ Mod4Mask,						XK_m,      spawn,	  	   {.v = music } },
++	{ Mod4Mask,						XK_v,      spawn,	  	   {.v = mpv } },
++	{ Mod4Mask,						XK_g,      spawn,	  	   {.v = calc } },
++	{ MODKEY,						XK_F3,     spawn,	  	   {.v = findercmd } },
++	{ MODKEY|ControlMask,			XK_p,	   spawn,	  	   {.v = mixer } },
++	{ Mod4Mask,						XK_x,      spawn,	  	   {.v = launcher } },
++	{ MODKEY|ShiftMask,				XK_f,      spawn,	  	   {.v = statuscmd } },
++	{ MODKEY|ShiftMask,				XK_x,      spawn,	  	   {.v = xkill } },
++	{ MODKEY|ControlMask,           XK_Right,  shiftviewclients,  { .i = +1 } },
++	{ MODKEY|ControlMask,           XK_Left,   shiftviewclients,  { .i = -1 } },
++	{ 0, 							XF86XK_AudioRaiseVolume,   spawn, 	   	{.v = volup} },
++	{ 0, 							XF86XK_AudioLowerVolume,   spawn, 	   	{.v = voldown} },
++	{ 0, 							XF86XK_AudioMute,	   	   spawn, 	   	{.v = volmute} },
++	{ 0, 							XF86XK_MonBrightnessUp,    spawn, 	   	{.v = brup} },
++	{ 0, 							XF86XK_MonBrightnessDown,  spawn, 	  	{.v = brdown} },
+ 	{ MODKEY,                       XK_j,          focusstack,             {.i = +1 } },
+ 	{ MODKEY,                       XK_k,          focusstack,             {.i = -1 } },
+ 	{ MODKEY,                       XK_i,          incnmaster,             {.i = +1 } },
+@@ -241,8 +324,8 @@ static Key keys[] = {
+ 	{ MODKEY|ShiftMask,             XK_k,          movestack,              {.i = -1 } },
+ 	{ MODKEY,                       XK_Return,     zoom,                   {0} },
+ 	{ MODKEY,                       XK_Tab,        view,                   {0} },
+-	{ MODKEY|Mod4Mask,              XK_Tab,        shiftviewclients,       { .i = -1 } },
+-	{ MODKEY|Mod4Mask,              XK_backslash,  shiftviewclients,       { .i = +1 } },
++	/* { MODKEY|Mod4Mask,              XK_Tab,        shiftviewclients,       { .i = -1 } }, */
++	/* { MODKEY|Mod4Mask,              XK_backslash,  shiftviewclients,       { .i = +1 } }, */
+ 	{ MODKEY|ControlMask,           XK_z,          showhideclient,         {0} },
+ 	{ MODKEY|ShiftMask,             XK_c,          killclient,             {0} },
+ 	{ MODKEY|ShiftMask,             XK_q,          quit,                   {0} },
