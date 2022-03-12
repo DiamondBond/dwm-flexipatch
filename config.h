@@ -101,7 +101,7 @@ static const char *mpv[] = { "mpv", "--player-operation-mode=pseudo-gui", NULL }
 static const char *music[] = { "sh", "/home/diamond/bin/startmusic", NULL };
 static const char *launcher[] = { "sh", "/home/diamond/bin/launcher.sh", NULL };
 static const char *statuscmd[] = { "sh", "/home/diamond/bin/statf", NULL };
-static const char *exitdwm[] = { "sh", "/home/diamond/bin/exitdwm", NULL };
+/* static const char *exitdwm[] = { "sh", "/home/diamond/bin/exitdwm", NULL }; */
 static const char *xkill[] = { "xkill", NULL };
 static const char *slockcmd[] = { "slock", NULL };
 
@@ -134,7 +134,7 @@ static Key keys[] = {
 	{ Mod4Mask,						XK_x,      spawn,	  	   {.v = launcher } },
 	{ MODKEY|ShiftMask,				XK_f,      spawn,	  	   {.v = statuscmd } },
 	{ MODKEY|ShiftMask,				XK_x,      spawn,	  	   {.v = xkill } },
-	{ MODKEY|ShiftMask|ControlMask,	XK_q,      spawn,	  	   {.v = exitdwm } },
+	/* { MODKEY|ShiftMask|ControlMask,	XK_q,      spawn,	  	   {.v = exitdwm } }, */
 	{ MODKEY|ControlMask,           XK_Right,  shiftview,  { .i = +1 } },
 	{ MODKEY|ControlMask,           XK_Left,   shiftview,  { .i = -1 } },
 	{ 0, 							XF86XK_AudioRaiseVolume,   spawn, 	   	{.v = volup} },

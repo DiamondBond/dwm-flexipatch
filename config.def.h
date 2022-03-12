@@ -47,6 +47,7 @@ static const Rule rules[] = {
 	{ "Xfce4-appfinder",     NULL,       NULL,       0,            1,           -1 },
 	{ "TelegramDesktop",     NULL,       NULL,       0,            1,           -1 },
 	{ "Galculator",     NULL,       NULL,       0,            1,           -1 },
+	{ "Gpick",     NULL,       NULL,       0,            1,           -1 },
 	{ "Gnome-calendar",     NULL,       NULL,       0,            1,           -1 },
 	{ "Blueman-manager",     NULL,       NULL,       0,            1,           -1 },
 	{ "GParted",     NULL,       NULL,       0,            1,           -1 },
@@ -85,9 +86,9 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *findercmd[]  = { "xfce4-appfinder", NULL };
 static const char *roficmd[]  = { "rofi", "-combi-modi","window,drun","-show", "combi", NULL };
 static const char *termcmd[]  = { "xfce4-terminal", NULL };
+static const char *findercmd[]  = { "xfce4-appfinder", NULL };
 static const char *xterm[]  = { "xterm", NULL };
 static const char *web[] = { "firefox", NULL };
 static const char *shot[] = { "xfce4-screenshooter", "-f", NULL };
@@ -101,7 +102,7 @@ static const char *mpv[] = { "mpv", "--player-operation-mode=pseudo-gui", NULL }
 static const char *music[] = { "sh", "/home/diamond/bin/startmusic", NULL };
 static const char *launcher[] = { "sh", "/home/diamond/bin/launcher.sh", NULL };
 static const char *statuscmd[] = { "sh", "/home/diamond/bin/statf", NULL };
-static const char *exitdwm[] = { "sh", "/home/diamond/bin/exitdwm", NULL };
+/* static const char *exitdwm[] = { "sh", "/home/diamond/bin/exitdwm", NULL }; */
 static const char *xkill[] = { "xkill", NULL };
 static const char *slockcmd[] = { "slock", NULL };
 
@@ -134,7 +135,7 @@ static Key keys[] = {
 	{ Mod4Mask,						XK_x,      spawn,	  	   {.v = launcher } },
 	{ MODKEY|ShiftMask,				XK_f,      spawn,	  	   {.v = statuscmd } },
 	{ MODKEY|ShiftMask,				XK_x,      spawn,	  	   {.v = xkill } },
-	{ MODKEY|ShiftMask|ControlMask,	XK_q,      spawn,	  	   {.v = exitdwm } },
+	/* { MODKEY|ShiftMask|ControlMask,	XK_q,      spawn,	  	   {.v = exitdwm } }, */
 	{ MODKEY|ControlMask,           XK_Right,  shiftview,  { .i = +1 } },
 	{ MODKEY|ControlMask,           XK_Left,   shiftview,  { .i = -1 } },
 	{ 0, 							XF86XK_AudioRaiseVolume,   spawn, 	   	{.v = volup} },
