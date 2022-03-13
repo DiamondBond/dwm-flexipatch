@@ -100,6 +100,7 @@ enum {
 	NetSystemTray, NetSystemTrayOP, NetSystemTrayOrientation,
 	NetSystemTrayVisual, NetWMWindowTypeDock, NetSystemTrayOrientationHorz,
 	NetClientList,
+	NetClientListStacking,
 	NetLast
 }; /* EWMH atoms */
 
@@ -703,6 +704,7 @@ clientmessage(XEvent *e)
 	XSetWindowAttributes swa;
 	XClientMessageEvent *cme = &e->xclient;
 	Client *c = wintoclient(cme->window);
+	unsigned int i;
 
 	if (showsystray && systray && cme->window == systray->win && cme->message_type == netatom[NetSystemTrayOP]) {
 		/* add systray icons */
@@ -754,8 +756,20 @@ clientmessage(XEvent *e)
 			)));
 		}
 	} else if (cme->message_type == netatom[NetActiveWindow]) {
-		if (c != selmon->sel && !c->isurgent)
-			seturgent(c, 1);
+		if (c->tags & c->mon->tagset[c->mon->seltags])
+			focus(c);
+		else {
+			for (i = 0; i < NUMTAGS && !((1 << i) & c->tags); i++);
+			if (i < NUMTAGS) {
+				if (c != selmon->sel)
+					unfocus(selmon->sel, 0, NULL);
+				selmon = c->mon;
+				if (((1 << i) & TAGMASK) != selmon->tagset[selmon->seltags])
+					view(&((Arg) { .ui = 1 << i }));
+				focus(c);
+				restack(selmon);
+			}
+		}
 	}
 }
 
@@ -1473,6 +1487,8 @@ manage(Window w, XWindowAttributes *wa)
 	attachstack(c);
 	XChangeProperty(dpy, root, netatom[NetClientList], XA_WINDOW, 32, PropModeAppend,
 		(unsigned char *) &(c->win), 1);
+	XChangeProperty(dpy, root, netatom[NetClientListStacking], XA_WINDOW, 32, PropModePrepend,
+		(unsigned char *) &(c->win), 1);
 	XMoveResizeWindow(dpy, c->win, c->x + 2 * sw, c->y, c->w, c->h); /* some windows require this */
 
 	if (!HIDDEN(c))
@@ -2057,6 +2073,7 @@ setup(void)
 	netatom[NetWMFullscreen] = XInternAtom(dpy, "_NET_WM_STATE_FULLSCREEN", False);
 	netatom[NetWMWindowType] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE", False);
 	netatom[NetClientList] = XInternAtom(dpy, "_NET_CLIENT_LIST", False);
+	netatom[NetClientListStacking] = XInternAtom(dpy, "_NET_CLIENT_LIST_STACKING", False);
 	motifatom = XInternAtom(dpy, "_MOTIF_WM_HINTS", False);
 	/* init cursors */
 	cursor[CurNormal] = drw_cur_create(drw, XC_left_ptr);
@@ -2086,6 +2103,7 @@ setup(void)
 	XChangeProperty(dpy, root, netatom[NetSupported], XA_ATOM, 32,
 		PropModeReplace, (unsigned char *) netatom, NetLast);
 	XDeleteProperty(dpy, root, netatom[NetClientList]);
+	XDeleteProperty(dpy, root, netatom[NetClientListStacking]);
 	/* select events */
 	wa.cursor = cursor[CurNormal]->cursor;
 	wa.event_mask = SubstructureRedirectMask|SubstructureNotifyMask
@@ -2431,6 +2449,12 @@ updateclientlist()
 				XA_WINDOW, 32, PropModeAppend,
 				(unsigned char *) &(c->win), 1);
 
+	XDeleteProperty(dpy, root, netatom[NetClientListStacking]);
+	for (m = mons; m; m = m->next)
+		for (c = m->stack; c; c = c->snext)
+			XChangeProperty(dpy, root, netatom[NetClientListStacking],
+				XA_WINDOW, 32, PropModeAppend,
+				(unsigned char *) &(c->win), 1);
 }
 
 int

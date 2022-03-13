@@ -250,6 +250,7 @@ static const char *dmenucmd[] = {
 };
 /* static const char *termcmd[]  = { "st", NULL }; */
 static const char *roficmd[]  = { "rofi", "-combi-modi","window,drun","-show", "combi", NULL };
+static const char *rofitab[]  = { "rofi", "-show","window", NULL };
 static const char *termcmd[]  = { "xfce4-terminal", NULL };
 static const char *findercmd[]  = { "xfce4-appfinder", NULL };
 static const char *xterm[]  = { "xterm", NULL };
@@ -306,6 +307,7 @@ static Key keys[] = {
 	{ 0, 							XF86XK_AudioMute,	   	   spawn, 	   	{.v = volmute} },
 	{ 0, 							XF86XK_MonBrightnessUp,    spawn, 	   	{.v = brup} },
 	{ 0, 							XF86XK_MonBrightnessDown,  spawn, 	  	{.v = brdown} },
+	{ MODKEY,                       XK_grave,      showhideclient,                {0} },
 	{ MODKEY,                       XK_j,          focusstack,             {.i = +1 } },
 	{ MODKEY,                       XK_k,          focusstack,             {.i = -1 } },
 	{ MODKEY,                       XK_i,          incnmaster,             {.i = +1 } },
@@ -323,6 +325,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_j,          movestack,              {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,          movestack,              {.i = -1 } },
 	{ MODKEY,                       XK_Return,     zoom,                   {0} },
+	{ Mod4Mask,                     XK_Tab,        spawn,                  {.v = rofitab} },
 	{ MODKEY,                       XK_Tab,        view,                   {0} },
 	/* { MODKEY|Mod4Mask,              XK_Tab,        shiftviewclients,       { .i = -1 } }, */
 	/* { MODKEY|Mod4Mask,              XK_backslash,  shiftviewclients,       { .i = +1 } }, */

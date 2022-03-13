@@ -1,6 +1,6 @@
-diff --git a/config.h b/config.h
-index f9abe6b..769a32a 100644
---- a/config.h
+diff --git a/config.def.h b/config.h
+index f9abe6b..dcc47e4 100644
+--- a/config.def.h
 +++ b/config.h
 @@ -1,4 +1,5 @@
  /* See LICENSE file for copyright and license details. */
@@ -63,7 +63,7 @@ index f9abe6b..769a32a 100644
  };
  
  
-@@ -214,8 +248,33 @@ static const char *dmenucmd[] = {
+@@ -214,8 +248,34 @@ static const char *dmenucmd[] = {
  	"-sf", selfgcolor,
  	NULL
  };
@@ -71,6 +71,7 @@ index f9abe6b..769a32a 100644
 -
 +/* static const char *termcmd[]  = { "st", NULL }; */
 +static const char *roficmd[]  = { "rofi", "-combi-modi","window,drun","-show", "combi", NULL };
++static const char *rofitab[]  = { "rofi", "-show","window", NULL };
 +static const char *termcmd[]  = { "xfce4-terminal", NULL };
 +static const char *findercmd[]  = { "xfce4-appfinder", NULL };
 +static const char *xterm[]  = { "xterm", NULL };
@@ -99,7 +100,7 @@ index f9abe6b..769a32a 100644
  
  
  static Key keys[] = {
-@@ -223,6 +282,30 @@ static Key keys[] = {
+@@ -223,6 +283,31 @@ static Key keys[] = {
  	{ MODKEY,                       XK_p,          spawn,                  {.v = dmenucmd } },
  	{ MODKEY|ShiftMask,             XK_Return,     spawn,                  {.v = termcmd } },
  	{ MODKEY,                       XK_b,          togglebar,              {0} },
@@ -127,12 +128,15 @@ index f9abe6b..769a32a 100644
 +	{ 0, 							XF86XK_AudioMute,	   	   spawn, 	   	{.v = volmute} },
 +	{ 0, 							XF86XK_MonBrightnessUp,    spawn, 	   	{.v = brup} },
 +	{ 0, 							XF86XK_MonBrightnessDown,  spawn, 	  	{.v = brdown} },
++	{ MODKEY,                       XK_grave,      showhideclient,                {0} },
  	{ MODKEY,                       XK_j,          focusstack,             {.i = +1 } },
  	{ MODKEY,                       XK_k,          focusstack,             {.i = -1 } },
  	{ MODKEY,                       XK_i,          incnmaster,             {.i = +1 } },
-@@ -241,8 +324,8 @@ static Key keys[] = {
+@@ -240,9 +325,10 @@ static Key keys[] = {
+ 	{ MODKEY|ShiftMask,             XK_j,          movestack,              {.i = +1 } },
  	{ MODKEY|ShiftMask,             XK_k,          movestack,              {.i = -1 } },
  	{ MODKEY,                       XK_Return,     zoom,                   {0} },
++	{ Mod4Mask,                     XK_Tab,        spawn,                  {.v = rofitab} },
  	{ MODKEY,                       XK_Tab,        view,                   {0} },
 -	{ MODKEY|Mod4Mask,              XK_Tab,        shiftviewclients,       { .i = -1 } },
 -	{ MODKEY|Mod4Mask,              XK_backslash,  shiftviewclients,       { .i = +1 } },
