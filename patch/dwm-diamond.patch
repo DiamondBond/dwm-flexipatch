@@ -1,5 +1,5 @@
 diff --git a/config.h b/config.h
-index 2c8ee43..252047f 100644
+index 6f947a8..64882b6 100644
 --- a/config.h
 +++ b/config.h
 @@ -1,4 +1,5 @@
@@ -62,7 +62,7 @@ index 2c8ee43..252047f 100644
  };
  
  
-@@ -216,8 +249,34 @@ static const char *dmenucmd[] = {
+@@ -214,8 +247,34 @@ static const char *dmenucmd[] = {
  	"-sf", selfgcolor,
  	NULL
  };
@@ -99,7 +99,7 @@ index 2c8ee43..252047f 100644
  
  
  static Key keys[] = {
-@@ -225,6 +284,31 @@ static Key keys[] = {
+@@ -223,6 +282,30 @@ static Key keys[] = {
  	{ MODKEY,                       XK_p,          spawn,                  {.v = dmenucmd } },
  	{ MODKEY|ShiftMask,             XK_Return,     spawn,                  {.v = termcmd } },
  	{ MODKEY,                       XK_b,          togglebar,              {0} },
@@ -127,11 +127,10 @@ index 2c8ee43..252047f 100644
 +	{ 0, 							XF86XK_AudioMute,	   	   spawn, 	   	{.v = volmute} },
 +	{ 0, 							XF86XK_MonBrightnessUp,    spawn, 	   	{.v = brup} },
 +	{ 0, 							XF86XK_MonBrightnessDown,  spawn, 	  	{.v = brdown} },
-+	{ MODKEY,                       XK_grave,      showhideclient,                {0} },
  	{ MODKEY,                       XK_j,          focusstack,             {.i = +1 } },
  	{ MODKEY,                       XK_k,          focusstack,             {.i = -1 } },
  	{ MODKEY,                       XK_i,          incnmaster,             {.i = +1 } },
-@@ -245,9 +329,10 @@ static Key keys[] = {
+@@ -243,9 +326,10 @@ static Key keys[] = {
  	{ MODKEY|ShiftMask,             XK_j,          movestack,              {.i = +1 } },
  	{ MODKEY|ShiftMask,             XK_k,          movestack,              {.i = -1 } },
  	{ MODKEY,                       XK_Return,     zoom,                   {0} },

@@ -24,8 +24,6 @@
 #include "placemouse.h"
 #include "shiftviewclients.h"
 /* Layouts */
-#include "layout_centeredmaster.h"
-#include "layout_centeredfloatingmaster.h"
 #include "layout_monocle.h"
 #include "layout_tile.h"
 

@@ -25,8 +25,6 @@
 #include "dragmfact.c"
 /* Layouts */
 #include "layout_facts.c"
-#include "layout_centeredmaster.c"
-#include "layout_centeredfloatingmaster.c"
 #include "layout_monocle.c"
 #include "layout_tile.c"
 
