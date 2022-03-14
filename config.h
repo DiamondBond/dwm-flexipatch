@@ -4,6 +4,7 @@
 /* appearance */
 static const unsigned int borderpx       = 1;   /* border pixel of windows */
 static const unsigned int snap           = 32;  /* snap pixel */
+static const int swallowfloating         = 0;   /* 1 means swallow floating windows by default */
 static const int showbar                 = 1;   /* 0 means no bar */
 static const int topbar                  = 1;   /* 0 means bottom bar */
 /* Status is to be shown on: -1 (all monitors), 0 (a specific monitor by index), 'A' (active monitor) */
@@ -164,6 +165,7 @@ static const Rule rules[] = {
 	RULE(.wintype = WTYPE "TOOLBAR", .isfloating = 1)
 	RULE(.wintype = WTYPE "SPLASH", .isfloating = 1)
 	/* RULE(.class = "Gimp", .isfloating = 1) */
+	RULE(.class = "Event Tester", .isfloating = 1)
 	RULE(.class = "Pavucontrol", .isfloating = 1)
 	RULE(.title = "Library", .isfloating = 1)
 	RULE(.class = "Transmission-gtk", .isfloating = 1)
@@ -254,6 +256,7 @@ static const char *termcmd[]  = { "xfce4-terminal", NULL };
 static const char *findercmd[]  = { "xfce4-appfinder", NULL };
 static const char *xterm[]  = { "xterm", NULL };
 static const char *web[] = { "firefox", NULL };
+static const char *altweb[] = { "chromium", NULL };
 static const char *shot[] = { "xfce4-screenshooter", "-f", NULL };
 static const char *winshot[] = { "xfce4-screenshooter", "-w", NULL };
 static const char *selshot[] = { "xfce4-screenshooter", "-r", NULL };
@@ -284,6 +287,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_b,          togglebar,              {0} },
 	{ MODKEY|ControlMask,           XK_t,	   spawn,          {.v = xterm } },
 	{ MODKEY,						XK_w,	   spawn,	   	   {.v = web } },
+	{ MODKEY|ShiftMask,				XK_w,	   spawn,	   	   {.v = altweb } },
 	{ 0,							XK_Print,  spawn,	   	   {.v = shot } },
 	{ MODKEY,						XK_Print,  spawn,	   	   {.v = winshot } },
 	{ ShiftMask,	                XK_Print,  spawn,	   	   {.v = selshot } },
