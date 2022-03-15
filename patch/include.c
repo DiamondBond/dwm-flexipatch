@@ -22,7 +22,7 @@
 #include "movestack.c"
 #include "pertag.c"
 #include "placemouse.c"
-#include "shiftviewclients.c"
+#include "shiftview.c"
 #include "dragmfact.c"
 /* Layouts */
 #include "layout_facts.c"

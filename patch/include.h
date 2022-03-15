@@ -23,7 +23,7 @@
 #include "movestack.h"
 #include "pertag.h"
 #include "placemouse.h"
-#include "shiftviewclients.h"
+#include "shiftview.h"
 /* Layouts */
 #include "layout_monocle.h"
 #include "layout_tile.h"

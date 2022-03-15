@@ -95,7 +95,7 @@ static const char *const autostart[] = {
 	"volumeicon", NULL,
 	"matebook-applet", NULL,
 	"emacs", "--daemon", NULL,
-	"dropbox", "start", "-i", NULL,
+	/* "dropbox", "start", "-i", NULL, */
 	NULL
 };
 
@@ -302,8 +302,8 @@ static Key keys[] = {
 	{ Mod4Mask,						XK_x,      spawn,	  	   {.v = launcher } },
 	{ MODKEY|ShiftMask,				XK_f,      spawn,	  	   {.v = statuscmd } },
 	{ MODKEY|ShiftMask,				XK_x,      spawn,	  	   {.v = xkill } },
-	{ MODKEY|ControlMask,           XK_Right,  shiftviewclients,  { .i = +1 } },
-	{ MODKEY|ControlMask,           XK_Left,   shiftviewclients,  { .i = -1 } },
+	{ MODKEY|ControlMask,           XK_Right,  shiftview,  { .i = +1 } },
+	{ MODKEY|ControlMask,           XK_Left,   shiftview,  { .i = -1 } },
 	{ 0, 							XF86XK_AudioRaiseVolume,   spawn, 	   	{.v = volup} },
 	{ 0, 							XF86XK_AudioLowerVolume,   spawn, 	   	{.v = voldown} },
 	{ 0, 							XF86XK_AudioMute,	   	   spawn, 	   	{.v = volmute} },
@@ -332,8 +332,6 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Return,     zoom,                   {0} },
 	{ Mod4Mask,                     XK_Tab,        spawn,                  {.v = rofitab} },
 	{ MODKEY,                       XK_Tab,        view,                   {0} },
-	/* { MODKEY|Mod4Mask,              XK_Tab,        shiftviewclients,       { .i = -1 } }, */
-	/* { MODKEY|Mod4Mask,              XK_backslash,  shiftviewclients,       { .i = +1 } }, */
 	{ MODKEY|ControlMask,           XK_z,          showhideclient,         {0} },
 	{ MODKEY|ShiftMask,             XK_c,          killclient,             {0} },
 	{ MODKEY|ShiftMask,             XK_q,          quit,                   {0} },
