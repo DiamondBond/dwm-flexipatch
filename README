@@ -9,6 +9,7 @@ In order to build dwm you need the Xlib header files.
 
 Patches
 ------------
+```
 BAR_AWESOMEBAR_PATCH
 BAR_LTSYMBOL_PATCH
 BAR_STATUS_PATCH
@@ -37,6 +38,7 @@ RESIZEPOINT_PATCH
 SAVEFLOATS_PATCH
 SHIFTVIEW_PATCH
 STEAM_PATCH
+```
 
 Installation
 ------------
