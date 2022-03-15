@@ -12,6 +12,7 @@
 #include "bar_wintitleactions.h"
 
 /* Other patches */
+#include "attachx.h"
 #include "cfacts.h"
 #include "cool_autostart.h"
 #include "decorationhints.h"

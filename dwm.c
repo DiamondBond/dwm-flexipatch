@@ -1489,7 +1489,7 @@ manage(Window w, XWindowAttributes *wa)
 		XRaiseWindow(dpy, c->win);
 		XSetWindowBorder(dpy, w, scheme[SchemeNorm][ColFloat].pixel);
 	}
-	attach(c);
+	attachx(c);
 	attachstack(c);
 	XChangeProperty(dpy, root, netatom[NetClientList], XA_WINDOW, 32, PropModeAppend,
 		(unsigned char *) &(c->win), 1);
@@ -1908,7 +1908,7 @@ sendmon(Client *c, Monitor *m)
 	detachstack(c);
 	c->mon = m;
 	c->tags = m->tagset[m->seltags]; /* assign tags of target monitor */
-	attach(c);
+	attachx(c);
 	attachstack(c);
 	focus(NULL);
 	arrange(NULL);
