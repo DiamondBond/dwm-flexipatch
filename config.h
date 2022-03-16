@@ -79,7 +79,8 @@ static char *colors[][ColCount] = {
 
 static const char *const autostart[] = {
 	"sh", "-c", "/home/diamond/bin/setenv.sh", NULL,
-	"feh", "--bg-scale", "/home/diamond/Pictures/Wallpapers/earth.jpg", NULL,
+	"sh", "-c", "/home/diamond/bin/setbg.sh", NULL,
+	/* "feh", "--bg-scale", "/home/diamond/Pictures/Wallpapers/earth.jpg", NULL, */
 	"xset", "b", "off", NULL,
 	"sh", "-c", "/home/diamond/bin/disable_touchscreen.sh", NULL,
 	"xrdb", "/home/diamond/.Xresources", NULL,

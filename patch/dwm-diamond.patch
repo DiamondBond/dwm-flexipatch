@@ -1,11 +1,12 @@
 1a2
 > #include <X11/XF86keysym.h>
-80,81c81,102
+80,81c81,103
 < 	"st", NULL,
 < 	NULL /* terminate */
 ---
 > 	"sh", "-c", "/home/diamond/bin/setenv.sh", NULL,
-> 	"feh", "--bg-scale", "/home/diamond/Pictures/Wallpapers/earth.jpg", NULL,
+> 	"sh", "-c", "/home/diamond/bin/setbg.sh", NULL,
+> 	/* "feh", "--bg-scale", "/home/diamond/Pictures/Wallpapers/earth.jpg", NULL, */
 > 	"xset", "b", "off", NULL,
 > 	"sh", "-c", "/home/diamond/bin/disable_touchscreen.sh", NULL,
 > 	"xrdb", "/home/diamond/.Xresources", NULL,
@@ -26,7 +27,7 @@
 > 	"emacs", "--daemon", NULL,
 > 	/* "dropbox", "start", "-i", NULL, */
 > 	NULL
-148,149c169,186
+148,149c170,187
 < 	RULE(.class = "Gimp", .tags = 1 << 4)
 < 	RULE(.class = "Firefox", .tags = 1 << 7)
 ---
@@ -48,7 +49,7 @@
 > 	RULE(.class = "zoom", .isfloating = 1)
 > 	RULE(.class = "Software-properties-gtk", .isfloating = 1)
 > 	RULE(.class = "Lightdm-gtk-greeter-settings", .isfloating = 1)
-217,218c254,283
+217,218c255,284
 < static const char *termcmd[]  = { "st", NULL };
 < 
 ---
@@ -82,7 +83,7 @@
 > static const char *volmute[] = { "pactl", "set-sink-mute", "0", "toggle", NULL };
 > static const char *brup[] = { "sudo", "brightnessctl", "set", "5%+", NULL };
 > static const char *brdown[] = { "sudo", "brightnessctl", "set", "5%-", NULL };
-225a291,317
+225a292,318
 > 	{ MODKEY|ControlMask,           XK_t,	   spawn,          {.v = xterm } },
 > 	{ MODKEY,						XK_w,	   spawn,	   	   {.v = web } },
 > 	{ MODKEY|ShiftMask,				XK_w,	   spawn,	   	   {.v = altweb } },
@@ -110,8 +111,8 @@
 > 	{ 0, 							XF86XK_MonBrightnessUp,    spawn, 	   	{.v = brup} },
 > 	{ 0, 							XF86XK_MonBrightnessDown,  spawn, 	  	{.v = brdown} },
 > 	{ MODKEY,                       XK_grave,      showhideclient,                {0} },
-245a338
+245a339
 > 	{ Mod4Mask,                     XK_Tab,        spawn,                  {.v = rofitab} },
-247,248d339
+247,248d340
 < 	{ MODKEY|ShiftMask,             XK_Tab,        shiftview,              { .i = -1 } },
 < 	{ MODKEY|ShiftMask,             XK_backslash,  shiftview,              { .i = +1 } },
