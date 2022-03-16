@@ -79,15 +79,18 @@ static char *colors[][ColCount] = {
 
 static const char *const autostart[] = {
 	"sh", "-c", "/home/diamond/bin/setenv.sh", NULL,
+	"feh", "--bg-scale", "/home/diamond/Pictures/Wallpapers/earth.jpg", NULL,
 	"xset", "b", "off", NULL,
 	"sh", "-c", "/home/diamond/bin/disable_touchscreen.sh", NULL,
 	"xrdb", "/home/diamond/.Xresources", NULL,
 	"sh", "-c", "while :; do dwmstatus.sh -; sleep 60; done", NULL,
-	"sh", "-c", "/home/diamond/bin/dwmcompton", NULL,
+	/* "sh", "-c", "/home/diamond/bin/dwmcompton", NULL, */
+	"sh", "-c", "/home/diamond/bin/dwm_tog_comp", NULL,
 	"pactl", "set-default-sink", "0", NULL,
 	"lxpolkit", NULL,
 	"dunst", NULL,
-	"xss-lock", "slock", NULL,
+	"light-locker", NULL,
+	/* "xss-lock", "slock", NULL, */
 	"xfce4-power-manager", NULL,
 	"libinput-gestures", NULL,
 	"nm-applet", NULL,
@@ -270,6 +273,7 @@ static const char *statuscmd[] = { "sh", "/home/diamond/bin/statf", NULL };
 /* static const char *exitdwm[] = { "sh", "/home/diamond/bin/exitdwm", NULL }; */
 static const char *xkill[] = { "xkill", NULL };
 static const char *slockcmd[] = { "slock", NULL };
+static const char *toggle_compositor[] = { "sh", "/home/diamond/bin/dwm_tog_comp", NULL };
 
 /* Volume and brightness binds */
 static const char *volup[] = { "pactl", "set-sink-volume", "0", "+5%", NULL };
@@ -300,6 +304,7 @@ static Key keys[] = {
 	{ MODKEY,						XK_F3,     spawn,	  	   {.v = findercmd } },
 	{ MODKEY|ControlMask,			XK_p,	   spawn,	  	   {.v = mixer } },
 	{ Mod4Mask,						XK_x,      spawn,	  	   {.v = launcher } },
+	{ MODKEY|ShiftMask,				XK_F12,    spawn,	  	   {.v = toggle_compositor } },
 	{ MODKEY|ShiftMask,				XK_f,      spawn,	  	   {.v = statuscmd } },
 	{ MODKEY|ShiftMask,				XK_x,      spawn,	  	   {.v = xkill } },
 	{ MODKEY|ControlMask,           XK_Right,  shiftview,  { .i = +1 } },
