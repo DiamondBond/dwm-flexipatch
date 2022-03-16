@@ -90,8 +90,8 @@ static const char *const autostart[] = {
 	"pactl", "set-default-sink", "0", NULL,
 	"lxpolkit", NULL,
 	"dunst", NULL,
-	"light-locker", NULL,
-	/* "xss-lock", "slock", NULL, */
+	/* "light-locker", NULL, */
+	"xss-lock", "slock", NULL,
 	"xfce4-power-manager", NULL,
 	"libinput-gestures", NULL,
 	"nm-applet", NULL,
