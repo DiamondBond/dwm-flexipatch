@@ -1,13 +1,14 @@
 1a2
 > #include <X11/XF86keysym.h>
-80c81,96
+80c81,97
 < 	"st", NULL,
 ---
 > 	"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL,
 > 	"xset", "b", "off", NULL,
 > 	"sh", "-c", "/home/diamond/bin/disable_touchscreen.sh", NULL,
+> 	"hsetroot", "-solid", "darkgray", NULL,
 > 	"xrdb", "/home/diamond/.Xresources", NULL,
-> 	/* "sh", "-c", "while :; do dwmstatus.sh; sleep 60; done", NULL, */
+> 	"sh", "-c", "while :; do dwmstatus.sh -; sleep 60; done", NULL,
 > 	"sh", "-c", "/home/diamond/bin/startcompositor", NULL,
 > 	"dunst", NULL,
 > 	/* "xss-lock", "slock", NULL, */
@@ -19,7 +20,7 @@
 > 	/* "/usr/bin/volumeicon", NULL, */
 > 	"emacs", "--daemon", NULL,
 > 	"dropbox", "start", "-i", NULL,
-148,149c164,188
+148,149c165,189
 < 	RULE(.class = "Gimp", .tags = 1 << 4)
 < 	RULE(.class = "Firefox", .tags = 1 << 7)
 ---
@@ -48,7 +49,7 @@
 > 	RULE(.class = "Nm-connection-editor", .isfloating = 1)
 > 	RULE(.class = "Software-properties-gtk", .isfloating = 1)
 > 	RULE(.class = "Lightdm-gtk-greeter-settings", .isfloating = 1)
-219,220c258,294
+219,220c259,295
 < static const char *termcmd[]  = { "st", NULL };
 < 
 ---
@@ -89,7 +90,7 @@
 > /* static const char *brdown[] = { "brightnessctl", "set", "5%-", NULL }; */
 > static const char *brup[] = { "sh", "/home/diamond/bin/changeBrightness", "5%+", NULL };
 > static const char *brdown[] = { "sh", "/home/diamond/bin/changeBrightness", "5%-", NULL };
-227a302,330
+227a303,331
 > 	{ MODKEY|ControlMask,           XK_t,	   spawn,          {.v = xterm } },
 > 	{ MODKEY,						XK_w,	   spawn,	   	   {.v = web } },
 > 	{ MODKEY|ShiftMask,				XK_w,	   spawn,	   	   {.v = altweb } },
@@ -119,12 +120,12 @@
 > 	{ 0, 							XF86XK_MonBrightnessUp,    spawn, 	   	{.v = brup} },
 > 	{ 0, 							XF86XK_MonBrightnessDown,  spawn, 	  	{.v = brdown} },
 > 	{ MODKEY,                       XK_grave,      showhideclient,                {0} },
-247a351
+247a352
 > 	{ Mod4Mask,                     XK_Tab,        spawn,                  {.v = rofitab} },
-249,250d352
+249,250d353
 < 	{ MODKEY|ShiftMask,             XK_Tab,        shiftview,              { .i = -1 } },
 < 	{ MODKEY|ShiftMask,             XK_backslash,  shiftview,              { .i = +1 } },
-314,316d415
+314,316d416
 < 
 < 
 < 

@@ -81,8 +81,9 @@ static const char *const autostart[] = {
 	"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL,
 	"xset", "b", "off", NULL,
 	"sh", "-c", "/home/diamond/bin/disable_touchscreen.sh", NULL,
+	"hsetroot", "-solid", "darkgray", NULL,
 	"xrdb", "/home/diamond/.Xresources", NULL,
-	/* "sh", "-c", "while :; do dwmstatus.sh; sleep 60; done", NULL, */
+	"sh", "-c", "while :; do dwmstatus.sh -; sleep 60; done", NULL,
 	"sh", "-c", "/home/diamond/bin/startcompositor", NULL,
 	"dunst", NULL,
 	/* "xss-lock", "slock", NULL, */
