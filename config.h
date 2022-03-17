@@ -78,28 +78,25 @@ static char *colors[][ColCount] = {
 
 
 static const char *const autostart[] = {
-	"sh", "-c", "/home/diamond/bin/setenv.sh", NULL,
+	"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL,
 	"sh", "-c", "/home/diamond/bin/setbg.sh", NULL,
-	/* "feh", "--bg-scale", "/home/diamond/Pictures/Wallpapers/earth.jpg", NULL, */
+	/* "sh", "-c", "/home/diamond/bin/setenv.sh", NULL, */
 	"xset", "b", "off", NULL,
 	"sh", "-c", "/home/diamond/bin/disable_touchscreen.sh", NULL,
 	"xrdb", "/home/diamond/.Xresources", NULL,
-	"sh", "-c", "while :; do dwmstatus.sh -; sleep 60; done", NULL,
-	/* "sh", "-c", "/home/diamond/bin/dwmcompton", NULL, */
-	"sh", "-c", "/home/diamond/bin/dwm_tog_comp", NULL,
-	"pactl", "set-default-sink", "0", NULL,
-	"lxpolkit", NULL,
+	/* "sh", "-c", "while :; do dwmstatus.sh -; sleep 60; done", NULL, */
+	"sh", "-c", "/home/diamond/bin/dwmstatus.sh", NULL,
+	/* "picom", "--config", "/home/diamond/.config/picom.conf", NULL, */
+	"sh", "-c", "/home/diamond/bin/startcompositor", NULL,
 	"dunst", NULL,
-	/* "light-locker", NULL, */
 	"xss-lock", "slock", NULL,
 	"xfce4-power-manager", NULL,
 	"libinput-gestures", NULL,
+	"/usr/bin/volumeicon", NULL,
 	"nm-applet", NULL,
 	"blueman-applet", NULL,
-	"volumeicon", NULL,
-	"matebook-applet", NULL,
 	"emacs", "--daemon", NULL,
-	/* "dropbox", "start", "-i", NULL, */
+	"dropbox", "start", "-i", NULL,
 	NULL
 };
 
@@ -183,6 +180,12 @@ static const Rule rules[] = {
 	RULE(.class = "XTerm", .isfloating = 1)
 	RULE(.class = "Steam", .isfloating = 1)
 	RULE(.class = "zoom", .isfloating = 1)
+	RULE(.class = "Gzdoom", .isfloating = 1)
+	RULE(.class = "Tk", .isfloating = 1)
+	RULE(.class = "Toplevel", .isfloating = 1)
+	RULE(.class = "Gnome-system-monitor", .isfloating = 1)
+	RULE(.class = "Xfce4-power-manager-settings", .isfloating = 1)
+	RULE(.class = "Nm-connection-editor", .isfloating = 1)
 	RULE(.class = "Software-properties-gtk", .isfloating = 1)
 	RULE(.class = "Lightdm-gtk-greeter-settings", .isfloating = 1)
 };
@@ -275,13 +278,18 @@ static const char *statuscmd[] = { "sh", "/home/diamond/bin/statf", NULL };
 static const char *xkill[] = { "xkill", NULL };
 static const char *slockcmd[] = { "slock", NULL };
 static const char *toggle_compositor[] = { "sh", "/home/diamond/bin/dwm_tog_comp", NULL };
+static const char *dunst_dismiss[] = { "sh", "/home/diamond/bin/dunst_dismiss", NULL };
 
 /* Volume and brightness binds */
-static const char *volup[] = { "pactl", "set-sink-volume", "0", "+5%", NULL };
-static const char *voldown[] = { "pactl", "set-sink-volume", "0", "-5%", NULL };
+/* static const char *volup[] = { "pactl", "set-sink-volume", "0", "+5%", NULL }; */
+/* static const char *voldown[] = { "pactl", "set-sink-volume", "0", "-5%", NULL }; */
 static const char *volmute[] = { "pactl", "set-sink-mute", "0", "toggle", NULL };
-static const char *brup[] = { "sudo", "brightnessctl", "set", "5%+", NULL };
-static const char *brdown[] = { "sudo", "brightnessctl", "set", "5%-", NULL };
+static const char *volup[] = { "sh", "/home/diamond/bin/changeVolume", "+5%", NULL };
+static const char *voldown[] = { "sh", "/home/diamond/bin/changeVolume", "-5%", NULL };
+/* static const char *brup[] = { "brightnessctl", "set", "5%+", NULL }; */
+/* static const char *brdown[] = { "brightnessctl", "set", "5%-", NULL }; */
+static const char *brup[] = { "sh", "/home/diamond/bin/changeBrightness", "5%+", NULL };
+static const char *brdown[] = { "sh", "/home/diamond/bin/changeBrightness", "5%-", NULL };
 
 
 static Key keys[] = {
@@ -299,6 +307,7 @@ static Key keys[] = {
 	{ MODKEY,						XK_e,      spawn,	  	   {.v = explorer } },
 	{ Mod4Mask,						XK_e,      spawn,	  	   {.v = emacs } },
 	{ Mod4Mask,						XK_space,  spawn,	  	   {.v = roficmd } },
+	{ ControlMask,						XK_space,  spawn,	  	   {.v = dunst_dismiss } },
 	{ Mod4Mask,						XK_m,      spawn,	  	   {.v = music } },
 	{ Mod4Mask,						XK_v,      spawn,	  	   {.v = mpv } },
 	{ Mod4Mask,						XK_g,      spawn,	  	   {.v = calc } },
@@ -399,6 +408,3 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,              Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,              Button3,        toggletag,      {0} },
 };
-
-
-
