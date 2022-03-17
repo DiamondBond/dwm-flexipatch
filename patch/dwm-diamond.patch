@@ -1,30 +1,25 @@
 1a2
 > #include <X11/XF86keysym.h>
-80,81c81,100
+80c81,96
 < 	"st", NULL,
-< 	NULL /* terminate */
 ---
 > 	"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL,
-> 	"sh", "-c", "/home/diamond/bin/setbg.sh", NULL,
-> 	/* "sh", "-c", "/home/diamond/bin/setenv.sh", NULL, */
 > 	"xset", "b", "off", NULL,
 > 	"sh", "-c", "/home/diamond/bin/disable_touchscreen.sh", NULL,
 > 	"xrdb", "/home/diamond/.Xresources", NULL,
-> 	/* "sh", "-c", "while :; do dwmstatus.sh -; sleep 60; done", NULL, */
-> 	"sh", "-c", "/home/diamond/bin/dwmstatus.sh", NULL,
-> 	/* "picom", "--config", "/home/diamond/.config/picom.conf", NULL, */
+> 	/* "sh", "-c", "while :; do dwmstatus.sh; sleep 60; done", NULL, */
 > 	"sh", "-c", "/home/diamond/bin/startcompositor", NULL,
 > 	"dunst", NULL,
-> 	"xss-lock", "slock", NULL,
+> 	/* "xss-lock", "slock", NULL, */
 > 	"xfce4-power-manager", NULL,
 > 	"libinput-gestures", NULL,
-> 	"/usr/bin/volumeicon", NULL,
 > 	"nm-applet", NULL,
 > 	"blueman-applet", NULL,
+> 	"/home/diamond/git/matebook-applet/matebook-applet", NULL,
+> 	/* "/usr/bin/volumeicon", NULL, */
 > 	"emacs", "--daemon", NULL,
 > 	"dropbox", "start", "-i", NULL,
-> 	NULL
-148,149c167,190
+148,149c164,187
 < 	RULE(.class = "Gimp", .tags = 1 << 4)
 < 	RULE(.class = "Firefox", .tags = 1 << 7)
 ---
@@ -52,7 +47,7 @@
 > 	RULE(.class = "Nm-connection-editor", .isfloating = 1)
 > 	RULE(.class = "Software-properties-gtk", .isfloating = 1)
 > 	RULE(.class = "Lightdm-gtk-greeter-settings", .isfloating = 1)
-217,218c258,292
+217,218c255,290
 < static const char *termcmd[]  = { "st", NULL };
 < 
 ---
@@ -84,6 +79,7 @@
 > /* Volume and brightness binds */
 > /* static const char *volup[] = { "pactl", "set-sink-volume", "0", "+5%", NULL }; */
 > /* static const char *voldown[] = { "pactl", "set-sink-volume", "0", "-5%", NULL }; */
+> static const char *micmute[] = { "pactl", "set-source-mute", "0", "toggle", NULL };
 > static const char *volmute[] = { "pactl", "set-sink-mute", "0", "toggle", NULL };
 > static const char *volup[] = { "sh", "/home/diamond/bin/changeVolume", "+5%", NULL };
 > static const char *voldown[] = { "sh", "/home/diamond/bin/changeVolume", "-5%", NULL };
@@ -91,7 +87,7 @@
 > /* static const char *brdown[] = { "brightnessctl", "set", "5%-", NULL }; */
 > static const char *brup[] = { "sh", "/home/diamond/bin/changeBrightness", "5%+", NULL };
 > static const char *brdown[] = { "sh", "/home/diamond/bin/changeBrightness", "5%-", NULL };
-225a300,327
+225a298,326
 > 	{ MODKEY|ControlMask,           XK_t,	   spawn,          {.v = xterm } },
 > 	{ MODKEY,						XK_w,	   spawn,	   	   {.v = web } },
 > 	{ MODKEY|ShiftMask,				XK_w,	   spawn,	   	   {.v = altweb } },
@@ -117,15 +113,16 @@
 > 	{ 0, 							XF86XK_AudioRaiseVolume,   spawn, 	   	{.v = volup} },
 > 	{ 0, 							XF86XK_AudioLowerVolume,   spawn, 	   	{.v = voldown} },
 > 	{ 0, 							XF86XK_AudioMute,	   	   spawn, 	   	{.v = volmute} },
+> 	{ 0, 							XF86XK_AudioMicMute,	   spawn, 	   	{.v = micmute} },
 > 	{ 0, 							XF86XK_MonBrightnessUp,    spawn, 	   	{.v = brup} },
 > 	{ 0, 							XF86XK_MonBrightnessDown,  spawn, 	  	{.v = brdown} },
 > 	{ MODKEY,                       XK_grave,      showhideclient,                {0} },
-245a348
+245a347
 > 	{ Mod4Mask,                     XK_Tab,        spawn,                  {.v = rofitab} },
-247,248d349
+247,248d348
 < 	{ MODKEY|ShiftMask,             XK_Tab,        shiftview,              { .i = -1 } },
 < 	{ MODKEY|ShiftMask,             XK_backslash,  shiftview,              { .i = +1 } },
-310,312d410
+310,312d409
 < 
 < 
 < 

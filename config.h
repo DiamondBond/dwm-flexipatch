@@ -79,25 +79,22 @@ static char *colors[][ColCount] = {
 
 static const char *const autostart[] = {
 	"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL,
-	"sh", "-c", "/home/diamond/bin/setbg.sh", NULL,
-	/* "sh", "-c", "/home/diamond/bin/setenv.sh", NULL, */
 	"xset", "b", "off", NULL,
 	"sh", "-c", "/home/diamond/bin/disable_touchscreen.sh", NULL,
 	"xrdb", "/home/diamond/.Xresources", NULL,
-	/* "sh", "-c", "while :; do dwmstatus.sh -; sleep 60; done", NULL, */
-	"sh", "-c", "/home/diamond/bin/dwmstatus.sh", NULL,
-	/* "picom", "--config", "/home/diamond/.config/picom.conf", NULL, */
+	/* "sh", "-c", "while :; do dwmstatus.sh; sleep 60; done", NULL, */
 	"sh", "-c", "/home/diamond/bin/startcompositor", NULL,
 	"dunst", NULL,
-	"xss-lock", "slock", NULL,
+	/* "xss-lock", "slock", NULL, */
 	"xfce4-power-manager", NULL,
 	"libinput-gestures", NULL,
-	"/usr/bin/volumeicon", NULL,
 	"nm-applet", NULL,
 	"blueman-applet", NULL,
+	"/home/diamond/git/matebook-applet/matebook-applet", NULL,
+	/* "/usr/bin/volumeicon", NULL, */
 	"emacs", "--daemon", NULL,
 	"dropbox", "start", "-i", NULL,
-	NULL
+	NULL /* terminate */
 };
 
 
@@ -283,6 +280,7 @@ static const char *dunst_dismiss[] = { "sh", "/home/diamond/bin/dunst_dismiss", 
 /* Volume and brightness binds */
 /* static const char *volup[] = { "pactl", "set-sink-volume", "0", "+5%", NULL }; */
 /* static const char *voldown[] = { "pactl", "set-sink-volume", "0", "-5%", NULL }; */
+static const char *micmute[] = { "pactl", "set-source-mute", "0", "toggle", NULL };
 static const char *volmute[] = { "pactl", "set-sink-mute", "0", "toggle", NULL };
 static const char *volup[] = { "sh", "/home/diamond/bin/changeVolume", "+5%", NULL };
 static const char *voldown[] = { "sh", "/home/diamond/bin/changeVolume", "-5%", NULL };
@@ -322,6 +320,7 @@ static Key keys[] = {
 	{ 0, 							XF86XK_AudioRaiseVolume,   spawn, 	   	{.v = volup} },
 	{ 0, 							XF86XK_AudioLowerVolume,   spawn, 	   	{.v = voldown} },
 	{ 0, 							XF86XK_AudioMute,	   	   spawn, 	   	{.v = volmute} },
+	{ 0, 							XF86XK_AudioMicMute,	   spawn, 	   	{.v = micmute} },
 	{ 0, 							XF86XK_MonBrightnessUp,    spawn, 	   	{.v = brup} },
 	{ 0, 							XF86XK_MonBrightnessDown,  spawn, 	  	{.v = brdown} },
 	{ MODKEY,                       XK_grave,      showhideclient,                {0} },
