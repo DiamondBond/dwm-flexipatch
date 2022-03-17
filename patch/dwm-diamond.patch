@@ -48,7 +48,7 @@
 > 	RULE(.class = "Nm-connection-editor", .isfloating = 1)
 > 	RULE(.class = "Software-properties-gtk", .isfloating = 1)
 > 	RULE(.class = "Lightdm-gtk-greeter-settings", .isfloating = 1)
-217,218c256,292
+219,220c258,294
 < static const char *termcmd[]  = { "st", NULL };
 < 
 ---
@@ -89,14 +89,14 @@
 > /* static const char *brdown[] = { "brightnessctl", "set", "5%-", NULL }; */
 > static const char *brup[] = { "sh", "/home/diamond/bin/changeBrightness", "5%+", NULL };
 > static const char *brdown[] = { "sh", "/home/diamond/bin/changeBrightness", "5%-", NULL };
-225a300,328
+227a302,330
 > 	{ MODKEY|ControlMask,           XK_t,	   spawn,          {.v = xterm } },
 > 	{ MODKEY,						XK_w,	   spawn,	   	   {.v = web } },
 > 	{ MODKEY|ShiftMask,				XK_w,	   spawn,	   	   {.v = altweb } },
 > 	{ 0,							XK_Print,  spawn,	   	   {.v = shot } },
 > 	{ MODKEY,						XK_Print,  spawn,	   	   {.v = winshot } },
 > 	{ ShiftMask,	                XK_Print,  spawn,	   	   {.v = selshot } },
-> 	{ MODKEY|ControlMask,           XK_l,      spawn,          {.v = slockcmd } },
+> 	{ Mod4Mask,                     XK_l,      spawn,          {.v = slockcmd } },
 > 	{ MODKEY,						XK_e,      spawn,	  	   {.v = explorer } },
 > 	{ Mod4Mask,						XK_e,      spawn,	  	   {.v = emacs } },
 > 	{ Mod4Mask,						XK_space,  spawn,	  	   {.v = roficmd } },
@@ -119,12 +119,12 @@
 > 	{ 0, 							XF86XK_MonBrightnessUp,    spawn, 	   	{.v = brup} },
 > 	{ 0, 							XF86XK_MonBrightnessDown,  spawn, 	  	{.v = brdown} },
 > 	{ MODKEY,                       XK_grave,      showhideclient,                {0} },
-245a349
+247a351
 > 	{ Mod4Mask,                     XK_Tab,        spawn,                  {.v = rofitab} },
-247,248d350
+249,250d352
 < 	{ MODKEY|ShiftMask,             XK_Tab,        shiftview,              { .i = -1 } },
 < 	{ MODKEY|ShiftMask,             XK_backslash,  shiftview,              { .i = +1 } },
-310,312d411
+314,316d415
 < 
 < 
 < 

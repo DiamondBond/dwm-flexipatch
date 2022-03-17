@@ -225,6 +225,8 @@ static const Layout layouts[] = {
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
+	{ "|M|",      centeredmaster },
+	{ ">M>",      centeredfloatingmaster },
 };
 
 
@@ -303,7 +305,7 @@ static Key keys[] = {
 	{ 0,							XK_Print,  spawn,	   	   {.v = shot } },
 	{ MODKEY,						XK_Print,  spawn,	   	   {.v = winshot } },
 	{ ShiftMask,	                XK_Print,  spawn,	   	   {.v = selshot } },
-	{ MODKEY|ControlMask,           XK_l,      spawn,          {.v = slockcmd } },
+	{ Mod4Mask,                     XK_l,      spawn,          {.v = slockcmd } },
 	{ MODKEY,						XK_e,      spawn,	  	   {.v = explorer } },
 	{ Mod4Mask,						XK_e,      spawn,	  	   {.v = emacs } },
 	{ Mod4Mask,						XK_space,  spawn,	  	   {.v = roficmd } },
@@ -354,6 +356,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_t,          setlayout,              {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,          setlayout,              {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,          setlayout,              {.v = &layouts[2]} },
+	{ MODKEY,                       XK_u,          setlayout,              {.v = &layouts[3]} },
+	{ MODKEY,                       XK_o,          setlayout,              {.v = &layouts[4]} },
 	{ MODKEY,                       XK_space,      setlayout,              {0} },
 	{ MODKEY|ShiftMask,             XK_space,      togglefloating,         {0} },
 	{ MODKEY|ControlMask|ShiftMask, XK_h,          togglehorizontalmax,    {0} },
