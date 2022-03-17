@@ -179,6 +179,7 @@ static const Rule rules[] = {
 	RULE(.class = "zoom", .isfloating = 1)
 	RULE(.class = "Gzdoom", .isfloating = 1)
 	RULE(.class = "Tk", .isfloating = 1)
+	RULE(.class = "openmw-launcher", .isfloating = 1)
 	RULE(.class = "Toplevel", .isfloating = 1)
 	RULE(.class = "Gnome-system-monitor", .isfloating = 1)
 	RULE(.class = "Xfce4-power-manager-settings", .isfloating = 1)
@@ -280,8 +281,9 @@ static const char *dunst_dismiss[] = { "sh", "/home/diamond/bin/dunst_dismiss", 
 /* Volume and brightness binds */
 /* static const char *volup[] = { "pactl", "set-sink-volume", "0", "+5%", NULL }; */
 /* static const char *voldown[] = { "pactl", "set-sink-volume", "0", "-5%", NULL }; */
-static const char *micmute[] = { "pactl", "set-source-mute", "0", "toggle", NULL };
-static const char *volmute[] = { "pactl", "set-sink-mute", "0", "toggle", NULL };
+/* static const char *micmute[] = { "pactl", "set-source-mute", "0", "toggle", NULL }; */
+static const char *micmute[] = { "sh", "/home/diamond/bin/toggleMic", NULL };
+static const char *volmute[] = { "sh", "/home/diamond/bin/toggleVolume", NULL };
 static const char *volup[] = { "sh", "/home/diamond/bin/changeVolume", "+5%", NULL };
 static const char *voldown[] = { "sh", "/home/diamond/bin/changeVolume", "-5%", NULL };
 /* static const char *brup[] = { "brightnessctl", "set", "5%+", NULL }; */

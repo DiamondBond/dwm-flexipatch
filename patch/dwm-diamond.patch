@@ -19,7 +19,7 @@
 > 	/* "/usr/bin/volumeicon", NULL, */
 > 	"emacs", "--daemon", NULL,
 > 	"dropbox", "start", "-i", NULL,
-148,149c164,187
+148,149c164,188
 < 	RULE(.class = "Gimp", .tags = 1 << 4)
 < 	RULE(.class = "Firefox", .tags = 1 << 7)
 ---
@@ -41,13 +41,14 @@
 > 	RULE(.class = "zoom", .isfloating = 1)
 > 	RULE(.class = "Gzdoom", .isfloating = 1)
 > 	RULE(.class = "Tk", .isfloating = 1)
+> 	RULE(.class = "openmw-launcher", .isfloating = 1)
 > 	RULE(.class = "Toplevel", .isfloating = 1)
 > 	RULE(.class = "Gnome-system-monitor", .isfloating = 1)
 > 	RULE(.class = "Xfce4-power-manager-settings", .isfloating = 1)
 > 	RULE(.class = "Nm-connection-editor", .isfloating = 1)
 > 	RULE(.class = "Software-properties-gtk", .isfloating = 1)
 > 	RULE(.class = "Lightdm-gtk-greeter-settings", .isfloating = 1)
-217,218c255,290
+217,218c256,292
 < static const char *termcmd[]  = { "st", NULL };
 < 
 ---
@@ -79,15 +80,16 @@
 > /* Volume and brightness binds */
 > /* static const char *volup[] = { "pactl", "set-sink-volume", "0", "+5%", NULL }; */
 > /* static const char *voldown[] = { "pactl", "set-sink-volume", "0", "-5%", NULL }; */
-> static const char *micmute[] = { "pactl", "set-source-mute", "0", "toggle", NULL };
-> static const char *volmute[] = { "pactl", "set-sink-mute", "0", "toggle", NULL };
+> /* static const char *micmute[] = { "pactl", "set-source-mute", "0", "toggle", NULL }; */
+> static const char *micmute[] = { "sh", "/home/diamond/bin/toggleMic", NULL };
+> static const char *volmute[] = { "sh", "/home/diamond/bin/toggleVolume", NULL };
 > static const char *volup[] = { "sh", "/home/diamond/bin/changeVolume", "+5%", NULL };
 > static const char *voldown[] = { "sh", "/home/diamond/bin/changeVolume", "-5%", NULL };
 > /* static const char *brup[] = { "brightnessctl", "set", "5%+", NULL }; */
 > /* static const char *brdown[] = { "brightnessctl", "set", "5%-", NULL }; */
 > static const char *brup[] = { "sh", "/home/diamond/bin/changeBrightness", "5%+", NULL };
 > static const char *brdown[] = { "sh", "/home/diamond/bin/changeBrightness", "5%-", NULL };
-225a298,326
+225a300,328
 > 	{ MODKEY|ControlMask,           XK_t,	   spawn,          {.v = xterm } },
 > 	{ MODKEY,						XK_w,	   spawn,	   	   {.v = web } },
 > 	{ MODKEY|ShiftMask,				XK_w,	   spawn,	   	   {.v = altweb } },
@@ -117,12 +119,12 @@
 > 	{ 0, 							XF86XK_MonBrightnessUp,    spawn, 	   	{.v = brup} },
 > 	{ 0, 							XF86XK_MonBrightnessDown,  spawn, 	  	{.v = brdown} },
 > 	{ MODKEY,                       XK_grave,      showhideclient,                {0} },
-245a347
+245a349
 > 	{ Mod4Mask,                     XK_Tab,        spawn,                  {.v = rofitab} },
-247,248d348
+247,248d350
 < 	{ MODKEY|ShiftMask,             XK_Tab,        shiftview,              { .i = -1 } },
 < 	{ MODKEY|ShiftMask,             XK_backslash,  shiftview,              { .i = +1 } },
-310,312d409
+310,312d411
 < 
 < 
 < 
