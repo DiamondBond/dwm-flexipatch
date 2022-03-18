@@ -86,7 +86,7 @@ static const char *const autostart[] = {
 	"sh", "-c", "while :; do /home/diamond/bin/dwmstatus.sh -; sleep 60; done", NULL,
 	"sh", "-c", "/home/diamond/bin/startcompositor", NULL,
 	"dunst", NULL,
-	/* "xss-lock", "slock", NULL, */
+	"xss-lock", "slock", NULL,
 	"xfce4-power-manager", NULL,
 	"libinput-gestures", NULL,
 	"nm-applet", NULL,
