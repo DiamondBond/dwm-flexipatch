@@ -84,7 +84,7 @@ static const char *const autostart[] = {
 	"hsetroot", "-solid", "darkgray", NULL,
 	"xrdb", "/home/diamond/.Xresources", NULL,
 	/* "sh", "-c", "while :; do /home/diamond/bin/dwmstatus.sh -; sleep 60; done", NULL, */
-	"dwmstatus 2>&1 >/dev/null", NULL,
+	"dwmstatus", NULL,
 	"sh", "-c", "/home/diamond/bin/startcompositor", NULL,
 	"dunst", NULL,
 	"xss-lock", "slock", NULL,
