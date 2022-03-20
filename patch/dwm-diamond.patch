@@ -1,14 +1,16 @@
 1a2
 > #include <X11/XF86keysym.h>
-80c81,97
+80c81,99
 < 	"st", NULL,
 ---
 > 	"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL,
-> 	"xset", "b", "off", NULL,
+> 	/* "xset", "b", "off", NULL, */
+> 	/* "xset", "s", "off", "-dpms", NULL, */
 > 	"sh", "-c", "/home/diamond/bin/disable_touchscreen.sh", NULL,
 > 	"hsetroot", "-solid", "darkgray", NULL,
 > 	"xrdb", "/home/diamond/.Xresources", NULL,
-> 	"sh", "-c", "while :; do dwmstatus.sh -; sleep 60; done", NULL,
+> 	/* "sh", "-c", "while :; do /home/diamond/bin/dwmstatus.sh -; sleep 60; done", NULL, */
+> 	"dwmstatus", NULL,
 > 	"sh", "-c", "/home/diamond/bin/startcompositor", NULL,
 > 	"dunst", NULL,
 > 	/* "xss-lock", "slock", NULL, */
@@ -20,7 +22,7 @@
 > 	/* "/usr/bin/volumeicon", NULL, */
 > 	"emacs", "--daemon", NULL,
 > 	"dropbox", "start", "-i", NULL,
-148,149c165,189
+148,149c167,191
 < 	RULE(.class = "Gimp", .tags = 1 << 4)
 < 	RULE(.class = "Firefox", .tags = 1 << 7)
 ---
@@ -49,12 +51,12 @@
 > 	RULE(.class = "Nm-connection-editor", .isfloating = 1)
 > 	RULE(.class = "Software-properties-gtk", .isfloating = 1)
 > 	RULE(.class = "Lightdm-gtk-greeter-settings", .isfloating = 1)
-219,220c259,295
+219,220c261,298
 < static const char *termcmd[]  = { "st", NULL };
 < 
 ---
 > /* static const char *termcmd[]  = { "st", NULL }; */
-> static const char *roficmd[]  = { "rofi", "-combi-modi","window,drun","-show", "combi", NULL };
+> static const char *roficmd[]  = { "rofi", "-show","combi", NULL };
 > static const char *rofitab[]  = { "rofi", "-show","window", NULL };
 > static const char *termcmd[]  = { "xfce4-terminal", NULL };
 > static const char *findercmd[]  = { "xfce4-appfinder", NULL };
@@ -74,6 +76,7 @@
 > static const char *statuscmd[] = { "sh", "/home/diamond/bin/statf", NULL };
 > /* static const char *exitdwm[] = { "sh", "/home/diamond/bin/exitdwm", NULL }; */
 > static const char *xkill[] = { "xkill", NULL };
+> /* static const char *slockcmd[] = { "loginctl lock-session", NULL }; */
 > static const char *slockcmd[] = { "slock", NULL };
 > static const char *toggle_compositor[] = { "sh", "/home/diamond/bin/dwm_tog_comp", NULL };
 > static const char *dunst_dismiss[] = { "sh", "/home/diamond/bin/dunst_dismiss", NULL };
@@ -90,7 +93,7 @@
 > /* static const char *brdown[] = { "brightnessctl", "set", "5%-", NULL }; */
 > static const char *brup[] = { "sh", "/home/diamond/bin/changeBrightness", "5%+", NULL };
 > static const char *brdown[] = { "sh", "/home/diamond/bin/changeBrightness", "5%-", NULL };
-227a303,331
+227a306,334
 > 	{ MODKEY|ControlMask,           XK_t,	   spawn,          {.v = xterm } },
 > 	{ MODKEY,						XK_w,	   spawn,	   	   {.v = web } },
 > 	{ MODKEY|ShiftMask,				XK_w,	   spawn,	   	   {.v = altweb } },
@@ -120,12 +123,12 @@
 > 	{ 0, 							XF86XK_MonBrightnessUp,    spawn, 	   	{.v = brup} },
 > 	{ 0, 							XF86XK_MonBrightnessDown,  spawn, 	  	{.v = brdown} },
 > 	{ MODKEY,                       XK_grave,      showhideclient,                {0} },
-247a352
+247a355
 > 	{ Mod4Mask,                     XK_Tab,        spawn,                  {.v = rofitab} },
-249,250d353
+249,250d356
 < 	{ MODKEY|ShiftMask,             XK_Tab,        shiftview,              { .i = -1 } },
 < 	{ MODKEY|ShiftMask,             XK_backslash,  shiftview,              { .i = +1 } },
-314,316d416
+314,316d419
 < 
 < 
 < 

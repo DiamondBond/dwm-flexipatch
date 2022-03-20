@@ -79,7 +79,8 @@ static char *colors[][ColCount] = {
 
 static const char *const autostart[] = {
 	"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL,
-	"xset", "b", "off", NULL,
+	/* "xset", "b", "off", NULL, */
+	/* "xset", "s", "off", "-dpms", NULL, */
 	"sh", "-c", "/home/diamond/bin/disable_touchscreen.sh", NULL,
 	"hsetroot", "-solid", "darkgray", NULL,
 	"xrdb", "/home/diamond/.Xresources", NULL,
@@ -87,7 +88,7 @@ static const char *const autostart[] = {
 	"dwmstatus", NULL,
 	"sh", "-c", "/home/diamond/bin/startcompositor", NULL,
 	"dunst", NULL,
-	"xss-lock", "slock", NULL,
+	/* "xss-lock", "slock", NULL, */
 	"xfce4-power-manager", NULL,
 	"libinput-gestures", NULL,
 	"nm-applet", NULL,
@@ -258,7 +259,7 @@ static const char *dmenucmd[] = {
 	NULL
 };
 /* static const char *termcmd[]  = { "st", NULL }; */
-static const char *roficmd[]  = { "rofi", "-combi-modi","window,drun","-show", "combi", NULL };
+static const char *roficmd[]  = { "rofi", "-show","combi", NULL };
 static const char *rofitab[]  = { "rofi", "-show","window", NULL };
 static const char *termcmd[]  = { "xfce4-terminal", NULL };
 static const char *findercmd[]  = { "xfce4-appfinder", NULL };
@@ -278,6 +279,7 @@ static const char *launcher[] = { "sh", "/home/diamond/bin/launcher.sh", NULL };
 static const char *statuscmd[] = { "sh", "/home/diamond/bin/statf", NULL };
 /* static const char *exitdwm[] = { "sh", "/home/diamond/bin/exitdwm", NULL }; */
 static const char *xkill[] = { "xkill", NULL };
+/* static const char *slockcmd[] = { "loginctl lock-session", NULL }; */
 static const char *slockcmd[] = { "slock", NULL };
 static const char *toggle_compositor[] = { "sh", "/home/diamond/bin/dwm_tog_comp", NULL };
 static const char *dunst_dismiss[] = { "sh", "/home/diamond/bin/dunst_dismiss", NULL };
