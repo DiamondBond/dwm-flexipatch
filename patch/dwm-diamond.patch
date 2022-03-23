@@ -7,7 +7,7 @@
 > 	/* "xset", "b", "off", NULL, */
 > 	/* "xset", "s", "off", "-dpms", NULL, */
 > 	"sh", "-c", "/home/diamond/bin/disable_touchscreen.sh", NULL,
-> 	"hsetroot", "-solid", "darkgray", NULL,
+> 	"hsetroot", "-solid", "dimgray", NULL,
 > 	"xrdb", "/home/diamond/.Xresources", NULL,
 > 	/* "sh", "-c", "while :; do /home/diamond/bin/dwmstatus.sh -; sleep 60; done", NULL, */
 > 	"dwmstatus", NULL,
