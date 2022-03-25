@@ -19,7 +19,7 @@
 > 	"nm-applet", NULL,
 > 	"blueman-applet", NULL,
 > 	"/home/diamond/git/matebook-applet/matebook-applet", NULL,
-> 	/* "/usr/bin/volumeicon", NULL, */
+> 	/* "pasystray", NULL, */
 > 	"emacs", "--daemon", NULL,
 > 	"dropbox", "start", "-i", NULL,
 148,149c167,191
@@ -51,7 +51,7 @@
 > 	RULE(.class = "Nm-connection-editor", .isfloating = 1)
 > 	RULE(.class = "Software-properties-gtk", .isfloating = 1)
 > 	RULE(.class = "Lightdm-gtk-greeter-settings", .isfloating = 1)
-219,220c261,300
+219,220c261,301
 < static const char *termcmd[]  = { "st", NULL };
 < 
 ---
@@ -65,9 +65,10 @@
 > static const char *web[] = { "firefox", NULL };
 > static const char *altweb[] = { "chromium", NULL };
 > static const char *shot[] = { "xfce4-screenshooter", "-f", NULL };
-> static const char *winshot[] = { "xfce4-screenshooter", "-w", NULL };
+> static const char *winshot[] = { "scrot", NULL };
 > static const char *selshot[] = { "xfce4-screenshooter", "-r", NULL };
 > static const char *explorer[] = { "thunar", NULL };
+> static const char *desktop[] = { "thunar", "/home/diamond/Desktop", NULL };
 > static const char *emacs[] = { "emacsclient", "-c","-n","-a","'emacs'", NULL };
 > static const char *mixer[] = { "pavucontrol", NULL };
 > static const char *calc[] = { "galculator", NULL };
@@ -95,7 +96,7 @@
 > /* static const char *brdown[] = { "brightnessctl", "set", "5%-", NULL }; */
 > static const char *brup[] = { "sh", "/home/diamond/bin/changeBrightness", "5%+", NULL };
 > static const char *brdown[] = { "sh", "/home/diamond/bin/changeBrightness", "5%-", NULL };
-227a308,338
+227a309,340
 > 	{ MODKEY|ControlMask,           XK_t,	   spawn,          {.v = xterm } },
 > 	{ MODKEY,						XK_w,	   spawn,	   	   {.v = web } },
 > 	{ MODKEY|ShiftMask,				XK_w,	   spawn,	   	   {.v = altweb } },
@@ -106,7 +107,8 @@
 > 	{ MODKEY,						XK_e,      spawn,	  	   {.v = explorer } },
 > 	{ Mod4Mask,						XK_e,      spawn,	  	   {.v = emacs } },
 > 	{ Mod4Mask,						XK_space,  spawn,	  	   {.v = roficmd } },
-> 	{ ControlMask,						XK_space,  spawn,	  	   {.v = dunst_dismiss } },
+> 	{ ControlMask,					XK_space,  spawn,	  	   {.v = dunst_dismiss } },
+> 	{ Mod4Mask,						XK_d,      spawn,	  	   {.v = desktop } },
 > 	{ Mod4Mask,						XK_m,      spawn,	  	   {.v = music } },
 > 	{ Mod4Mask,						XK_v,      spawn,	  	   {.v = mpv } },
 > 	{ Mod4Mask,						XK_g,      spawn,	  	   {.v = calc } },
@@ -127,12 +129,12 @@
 > 	{ 0, 							XF86XK_MonBrightnessUp,    spawn, 	   	{.v = brup} },
 > 	{ 0, 							XF86XK_MonBrightnessDown,  spawn, 	  	{.v = brdown} },
 > 	{ MODKEY,                       XK_grave,      showhideclient,                {0} },
-247a359
+247a361
 > 	{ Mod4Mask,                     XK_Tab,        spawn,                  {.v = rofitab} },
-249,250d360
+249,250d362
 < 	{ MODKEY|ShiftMask,             XK_Tab,        shiftview,              { .i = -1 } },
 < 	{ MODKEY|ShiftMask,             XK_backslash,  shiftview,              { .i = +1 } },
-314,316d423
+314,316d425
 < 
 < 
 < 

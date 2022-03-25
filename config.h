@@ -94,7 +94,7 @@ static const char *const autostart[] = {
 	"nm-applet", NULL,
 	"blueman-applet", NULL,
 	"/home/diamond/git/matebook-applet/matebook-applet", NULL,
-	/* "/usr/bin/volumeicon", NULL, */
+	/* "pasystray", NULL, */
 	"emacs", "--daemon", NULL,
 	"dropbox", "start", "-i", NULL,
 	NULL /* terminate */
@@ -268,9 +268,10 @@ static const char *xterm[]  = { "xterm", NULL };
 static const char *web[] = { "firefox", NULL };
 static const char *altweb[] = { "chromium", NULL };
 static const char *shot[] = { "xfce4-screenshooter", "-f", NULL };
-static const char *winshot[] = { "xfce4-screenshooter", "-w", NULL };
+static const char *winshot[] = { "scrot", NULL };
 static const char *selshot[] = { "xfce4-screenshooter", "-r", NULL };
 static const char *explorer[] = { "thunar", NULL };
+static const char *desktop[] = { "thunar", "/home/diamond/Desktop", NULL };
 static const char *emacs[] = { "emacsclient", "-c","-n","-a","'emacs'", NULL };
 static const char *mixer[] = { "pavucontrol", NULL };
 static const char *calc[] = { "galculator", NULL };
@@ -315,7 +316,8 @@ static Key keys[] = {
 	{ MODKEY,						XK_e,      spawn,	  	   {.v = explorer } },
 	{ Mod4Mask,						XK_e,      spawn,	  	   {.v = emacs } },
 	{ Mod4Mask,						XK_space,  spawn,	  	   {.v = roficmd } },
-	{ ControlMask,						XK_space,  spawn,	  	   {.v = dunst_dismiss } },
+	{ ControlMask,					XK_space,  spawn,	  	   {.v = dunst_dismiss } },
+	{ Mod4Mask,						XK_d,      spawn,	  	   {.v = desktop } },
 	{ Mod4Mask,						XK_m,      spawn,	  	   {.v = music } },
 	{ Mod4Mask,						XK_v,      spawn,	  	   {.v = mpv } },
 	{ Mod4Mask,						XK_g,      spawn,	  	   {.v = calc } },
