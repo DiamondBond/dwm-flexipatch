@@ -263,6 +263,7 @@ static const char *roficmd[]  = { "rofi", "-show","combi", NULL };
 static const char *rofitab[]  = { "rofi", "-show","window", NULL };
 static const char *termcmd[]  = { "xfce4-terminal", NULL };
 static const char *findercmd[]  = { "xfce4-appfinder", NULL };
+static const char *gmruncmd[]  = { "gmrun", NULL };
 static const char *xterm[]  = { "xterm", NULL };
 static const char *web[] = { "firefox", NULL };
 static const char *altweb[] = { "chromium", NULL };
@@ -283,6 +284,7 @@ static const char *slockcmd[] = { "loginctl lock-session", NULL };
 /* static const char *slockcmd[] = { "slock", NULL }; */
 static const char *toggle_compositor[] = { "sh", "/home/diamond/bin/dwm_tog_comp", NULL };
 static const char *dunst_dismiss[] = { "sh", "/home/diamond/bin/dunst_dismiss", NULL };
+static const char *killaccel[] = { "sh", "/home/diamond/bin/kmaccel", NULL };
 
 /* Volume and brightness binds */
 /* static const char *volup[] = { "pactl", "set-sink-volume", "0", "+5%", NULL }; */
@@ -317,9 +319,11 @@ static Key keys[] = {
 	{ Mod4Mask,						XK_m,      spawn,	  	   {.v = music } },
 	{ Mod4Mask,						XK_v,      spawn,	  	   {.v = mpv } },
 	{ Mod4Mask,						XK_g,      spawn,	  	   {.v = calc } },
+	{ MODKEY,						XK_F2,     spawn,	  	   {.v = gmruncmd } },
 	{ MODKEY,						XK_F3,     spawn,	  	   {.v = findercmd } },
 	{ MODKEY|ControlMask,			XK_p,	   spawn,	  	   {.v = mixer } },
 	{ Mod4Mask,						XK_x,      spawn,	  	   {.v = launcher } },
+	{ MODKEY|ShiftMask,				XK_g,      spawn,	  	   {.v = killaccel } },
 	{ MODKEY|ShiftMask,				XK_F12,    spawn,	  	   {.v = toggle_compositor } },
 	{ MODKEY|ShiftMask,				XK_f,      spawn,	  	   {.v = statuscmd } },
 	{ MODKEY|ShiftMask,				XK_x,      spawn,	  	   {.v = xkill } },

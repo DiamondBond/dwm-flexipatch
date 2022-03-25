@@ -51,7 +51,7 @@
 > 	RULE(.class = "Nm-connection-editor", .isfloating = 1)
 > 	RULE(.class = "Software-properties-gtk", .isfloating = 1)
 > 	RULE(.class = "Lightdm-gtk-greeter-settings", .isfloating = 1)
-219,220c261,298
+219,220c261,300
 < static const char *termcmd[]  = { "st", NULL };
 < 
 ---
@@ -60,6 +60,7 @@
 > static const char *rofitab[]  = { "rofi", "-show","window", NULL };
 > static const char *termcmd[]  = { "xfce4-terminal", NULL };
 > static const char *findercmd[]  = { "xfce4-appfinder", NULL };
+> static const char *gmruncmd[]  = { "gmrun", NULL };
 > static const char *xterm[]  = { "xterm", NULL };
 > static const char *web[] = { "firefox", NULL };
 > static const char *altweb[] = { "chromium", NULL };
@@ -80,6 +81,7 @@
 > /* static const char *slockcmd[] = { "slock", NULL }; */
 > static const char *toggle_compositor[] = { "sh", "/home/diamond/bin/dwm_tog_comp", NULL };
 > static const char *dunst_dismiss[] = { "sh", "/home/diamond/bin/dunst_dismiss", NULL };
+> static const char *killaccel[] = { "sh", "/home/diamond/bin/kmaccel", NULL };
 > 
 > /* Volume and brightness binds */
 > /* static const char *volup[] = { "pactl", "set-sink-volume", "0", "+5%", NULL }; */
@@ -93,7 +95,7 @@
 > /* static const char *brdown[] = { "brightnessctl", "set", "5%-", NULL }; */
 > static const char *brup[] = { "sh", "/home/diamond/bin/changeBrightness", "5%+", NULL };
 > static const char *brdown[] = { "sh", "/home/diamond/bin/changeBrightness", "5%-", NULL };
-227a306,334
+227a308,338
 > 	{ MODKEY|ControlMask,           XK_t,	   spawn,          {.v = xterm } },
 > 	{ MODKEY,						XK_w,	   spawn,	   	   {.v = web } },
 > 	{ MODKEY|ShiftMask,				XK_w,	   spawn,	   	   {.v = altweb } },
@@ -108,9 +110,11 @@
 > 	{ Mod4Mask,						XK_m,      spawn,	  	   {.v = music } },
 > 	{ Mod4Mask,						XK_v,      spawn,	  	   {.v = mpv } },
 > 	{ Mod4Mask,						XK_g,      spawn,	  	   {.v = calc } },
+> 	{ MODKEY,						XK_F2,     spawn,	  	   {.v = gmruncmd } },
 > 	{ MODKEY,						XK_F3,     spawn,	  	   {.v = findercmd } },
 > 	{ MODKEY|ControlMask,			XK_p,	   spawn,	  	   {.v = mixer } },
 > 	{ Mod4Mask,						XK_x,      spawn,	  	   {.v = launcher } },
+> 	{ MODKEY|ShiftMask,				XK_g,      spawn,	  	   {.v = killaccel } },
 > 	{ MODKEY|ShiftMask,				XK_F12,    spawn,	  	   {.v = toggle_compositor } },
 > 	{ MODKEY|ShiftMask,				XK_f,      spawn,	  	   {.v = statuscmd } },
 > 	{ MODKEY|ShiftMask,				XK_x,      spawn,	  	   {.v = xkill } },
@@ -123,12 +127,12 @@
 > 	{ 0, 							XF86XK_MonBrightnessUp,    spawn, 	   	{.v = brup} },
 > 	{ 0, 							XF86XK_MonBrightnessDown,  spawn, 	  	{.v = brdown} },
 > 	{ MODKEY,                       XK_grave,      showhideclient,                {0} },
-247a355
+247a359
 > 	{ Mod4Mask,                     XK_Tab,        spawn,                  {.v = rofitab} },
-249,250d356
+249,250d360
 < 	{ MODKEY|ShiftMask,             XK_Tab,        shiftview,              { .i = -1 } },
 < 	{ MODKEY|ShiftMask,             XK_backslash,  shiftview,              { .i = +1 } },
-314,316d419
+314,316d423
 < 
 < 
 < 
