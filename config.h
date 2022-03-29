@@ -79,16 +79,14 @@ static char *colors[][ColCount] = {
 
 static const char *const autostart[] = {
 	"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL,
-	/* "xset", "b", "off", NULL, */
-	/* "xset", "s", "off", "-dpms", NULL, */
 	"sh", "-c", "/home/diamond/bin/disable_touchscreen.sh", NULL,
 	"hsetroot", "-solid", "dimgray", NULL,
 	"xrdb", "/home/diamond/.Xresources", NULL,
-	/* "sh", "-c", "while :; do /home/diamond/bin/dwmstatus.sh -; sleep 60; done", NULL, */
 	"dwmstatus", NULL,
 	"sh", "-c", "/home/diamond/bin/startcompositor", NULL,
 	"dunst", NULL,
-	"xss-lock", "slock", NULL,
+	"light-locker", NULL,
+	/* "xss-lock", "slock", NULL, */
 	"xfce4-power-manager", NULL,
 	"libinput-gestures", NULL,
 	"nm-applet", NULL,
@@ -281,8 +279,9 @@ static const char *launcher[] = { "sh", "/home/diamond/bin/launcher.sh", NULL };
 static const char *statuscmd[] = { "sh", "/home/diamond/bin/statf", NULL };
 /* static const char *exitdwm[] = { "sh", "/home/diamond/bin/exitdwm", NULL }; */
 static const char *xkill[] = { "xkill", NULL };
-static const char *slockcmd[] = { "loginctl lock-session", NULL };
+/* static const char *slockcmd[] = { "loginctl lock-session", NULL }; */
 /* static const char *slockcmd[] = { "slock", NULL }; */
+static const char *slockcmd[] = { "light-locker-command -l", NULL };
 static const char *toggle_compositor[] = { "sh", "/home/diamond/bin/dwm_tog_comp", NULL };
 static const char *dunst_dismiss[] = { "sh", "/home/diamond/bin/dunst_dismiss", NULL };
 static const char *killaccel[] = { "sh", "/home/diamond/bin/kmaccel", NULL };
