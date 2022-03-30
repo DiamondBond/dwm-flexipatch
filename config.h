@@ -85,8 +85,8 @@ static const char *const autostart[] = {
 	"dwmstatus", NULL,
 	"sh", "-c", "/home/diamond/bin/startcompositor", NULL,
 	"dunst", NULL,
-	"light-locker", NULL,
-	/* "xss-lock", "slock", NULL, */
+	/* "light-locker", NULL, */
+	"xss-lock", "slock", NULL,
 	"xfce4-power-manager", NULL,
 	"libinput-gestures", NULL,
 	"nm-applet", NULL,
@@ -276,12 +276,13 @@ static const char *calc[] = { "galculator", NULL };
 static const char *mpv[] = { "mpv", "--player-operation-mode=pseudo-gui", NULL };
 static const char *music[] = { "sh", "/home/diamond/bin/startmusic", NULL };
 static const char *launcher[] = { "sh", "/home/diamond/bin/launcher.sh", NULL };
+static const char *powerctl[] = { "sh", "/home/diamond/bin/powerprofiles.sh", NULL };
 static const char *statuscmd[] = { "sh", "/home/diamond/bin/statf", NULL };
 /* static const char *exitdwm[] = { "sh", "/home/diamond/bin/exitdwm", NULL }; */
 static const char *xkill[] = { "xkill", NULL };
-/* static const char *slockcmd[] = { "loginctl lock-session", NULL }; */
+static const char *slockcmd[] = { "loginctl lock-session", NULL };
 /* static const char *slockcmd[] = { "slock", NULL }; */
-static const char *slockcmd[] = { "light-locker-command -l", NULL };
+/* static const char *slockcmd[] = { "light-locker-command -l", NULL }; */
 static const char *toggle_compositor[] = { "sh", "/home/diamond/bin/dwm_tog_comp", NULL };
 static const char *dunst_dismiss[] = { "sh", "/home/diamond/bin/dunst_dismiss", NULL };
 static const char *killaccel[] = { "sh", "/home/diamond/bin/kmaccel", NULL };
@@ -324,6 +325,7 @@ static Key keys[] = {
 	{ MODKEY,						XK_F3,     spawn,	  	   {.v = findercmd } },
 	{ MODKEY|ControlMask,			XK_p,	   spawn,	  	   {.v = mixer } },
 	{ Mod4Mask,						XK_x,      spawn,	  	   {.v = launcher } },
+	{ Mod4Mask,						XK_b,      spawn,	  	   {.v = powerctl } },
 	{ MODKEY|ShiftMask,				XK_g,      spawn,	  	   {.v = killaccel } },
 	{ MODKEY|ShiftMask,				XK_F12,    spawn,	  	   {.v = toggle_compositor } },
 	{ MODKEY|ShiftMask,				XK_f,      spawn,	  	   {.v = statuscmd } },
