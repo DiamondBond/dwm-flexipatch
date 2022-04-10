@@ -1693,7 +1693,18 @@ void
 quit(const Arg *arg)
 {
 	size_t i;
-	running = 0;
+	Monitor *m;
+	Client *c;
+	unsigned int n = 0;
+
+	for (m = mons; m; m = m->next)
+		for (c = m->clients; c; c = c->next, n++);
+
+	if (n <= quit_empty_window_count)
+		running = 0;
+	else
+		fprintf(stderr, "[dwm] not exiting (n=%d)\n", n);
+
 
 	/* kill child processes */
 	for (i = 0; i < autostart_len && !running; i++) {
