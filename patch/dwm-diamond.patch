@@ -1,5 +1,5 @@
 diff --git a/config.def.h b/config.h
-index 50f1eaf..d796a89 100644
+index 50f1eaf..9918fd6 100644
 --- a/config.def.h
 +++ b/config.h
 @@ -1,4 +1,5 @@
@@ -8,7 +8,7 @@ index 50f1eaf..d796a89 100644
  
  /* appearance */
  static const unsigned int borderpx       = 1;   /* border pixel of windows */
-@@ -77,7 +78,22 @@ static char *colors[][ColCount] = {
+@@ -77,7 +78,23 @@ static char *colors[][ColCount] = {
  
  
  static const char *const autostart[] = {
@@ -16,6 +16,7 @@ index 50f1eaf..d796a89 100644
 +	"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL,
 +	"sh", "-c", "/home/diamond/bin/disable_touchscreen.sh", NULL,
 +	"hsetroot", "-solid", "dimgray", NULL,
++	/* "feh", "--bg-scale", "/home/diamond/Pictures/Wallpapers/ocean.jpg", NULL, */
 +	"xrdb", "/home/diamond/.Xresources", NULL,
 +	"dwmstatus", NULL,
 +	"sh", "-c", "/home/diamond/bin/dwm_tog_comp", NULL,
@@ -32,7 +33,7 @@ index 50f1eaf..d796a89 100644
  	NULL /* terminate */
  };
  
-@@ -145,8 +161,31 @@ static const Rule rules[] = {
+@@ -145,8 +162,31 @@ static const Rule rules[] = {
  	RULE(.wintype = WTYPE "UTILITY", .isfloating = 1)
  	RULE(.wintype = WTYPE "TOOLBAR", .isfloating = 1)
  	RULE(.wintype = WTYPE "SPLASH", .isfloating = 1)
@@ -43,7 +44,7 @@ index 50f1eaf..d796a89 100644
 +	RULE(.class = "Pavucontrol", .isfloating = 1)
 +	RULE(.title = "Library", .isfloating = 1)
 +	RULE(.class = "Transmission-gtk", .isfloating = 1)
-+	RULE(.class = "krunner", .isfloating = 1)
++	RULE(.class = "Xfce4-appfinder", .isfloating = 1)
 +	RULE(.class = "TelegramDesktop", .isfloating = 1)
 +	RULE(.class = "Galculator", .isfloating = 1)
 +	RULE(.class = "Gpick", .isfloating = 1)
@@ -66,7 +67,7 @@ index 50f1eaf..d796a89 100644
  };
  
  
-@@ -216,8 +255,50 @@ static const char *dmenucmd[] = {
+@@ -216,8 +256,50 @@ static const char *dmenucmd[] = {
  	"-sf", selfgcolor,
  	NULL
  };
@@ -119,7 +120,7 @@ index 50f1eaf..d796a89 100644
  
  
  static Key keys[] = {
-@@ -225,6 +306,39 @@ static Key keys[] = {
+@@ -225,6 +307,39 @@ static Key keys[] = {
  	{ MODKEY,                       XK_p,          spawn,                  {.v = dmenucmd } },
  	{ MODKEY|ShiftMask,             XK_Return,     spawn,                  {.v = termcmd } },
  	{ MODKEY,                       XK_b,          togglebar,              {0} },
@@ -159,7 +160,7 @@ index 50f1eaf..d796a89 100644
  	{ MODKEY,                       XK_j,          focusstack,             {.i = +1 } },
  	{ MODKEY,                       XK_k,          focusstack,             {.i = -1 } },
  	{ MODKEY,                       XK_i,          incnmaster,             {.i = +1 } },
-@@ -245,9 +359,9 @@ static Key keys[] = {
+@@ -245,9 +360,9 @@ static Key keys[] = {
  	{ MODKEY|ShiftMask,             XK_j,          movestack,              {.i = +1 } },
  	{ MODKEY|ShiftMask,             XK_k,          movestack,              {.i = -1 } },
  	{ MODKEY,                       XK_Return,     zoom,                   {0} },
@@ -171,7 +172,7 @@ index 50f1eaf..d796a89 100644
  	{ MODKEY|ControlMask,           XK_z,          showhideclient,         {0} },
  	{ MODKEY|ShiftMask,             XK_c,          killclient,             {0} },
  	{ MODKEY|ShiftMask,             XK_q,          quit,                   {0} },
-@@ -311,6 +425,3 @@ static Button buttons[] = {
+@@ -311,6 +426,3 @@ static Button buttons[] = {
  	{ ClkTagBar,            MODKEY,              Button1,        tag,            {0} },
  	{ ClkTagBar,            MODKEY,              Button3,        toggletag,      {0} },
  };

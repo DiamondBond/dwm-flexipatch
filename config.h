@@ -81,6 +81,7 @@ static const char *const autostart[] = {
 	"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL,
 	"sh", "-c", "/home/diamond/bin/disable_touchscreen.sh", NULL,
 	"hsetroot", "-solid", "dimgray", NULL,
+	/* "feh", "--bg-scale", "/home/diamond/Pictures/Wallpapers/ocean.jpg", NULL, */
 	"xrdb", "/home/diamond/.Xresources", NULL,
 	"dwmstatus", NULL,
 	"sh", "-c", "/home/diamond/bin/dwm_tog_comp", NULL,
@@ -166,7 +167,7 @@ static const Rule rules[] = {
 	RULE(.class = "Pavucontrol", .isfloating = 1)
 	RULE(.title = "Library", .isfloating = 1)
 	RULE(.class = "Transmission-gtk", .isfloating = 1)
-	RULE(.class = "krunner", .isfloating = 1)
+	RULE(.class = "Xfce4-appfinder", .isfloating = 1)
 	RULE(.class = "TelegramDesktop", .isfloating = 1)
 	RULE(.class = "Galculator", .isfloating = 1)
 	RULE(.class = "Gpick", .isfloating = 1)
