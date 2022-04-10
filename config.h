@@ -80,21 +80,21 @@ static char *colors[][ColCount] = {
 static const char *const autostart[] = {
 	"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL,
 	"sh", "-c", "/home/diamond/bin/disable_touchscreen.sh", NULL,
-	"hsetroot", "-solid", "dimgray", NULL,
-	/* "feh", "--bg-scale", "/home/diamond/Pictures/Wallpapers/ocean.jpg", NULL, */
+	/* "hsetroot", "-solid", "dimgray", NULL, */
+	"feh", "--bg-scale", "feh --bg-scale ~/Pictures/Wallpapers/pexels-pixabay-2150.jpg", NULL,
 	"xrdb", "/home/diamond/.Xresources", NULL,
 	"dwmstatus", NULL,
 	"sh", "-c", "/home/diamond/bin/dwm_tog_comp", NULL,
 	"dunst", NULL,
-	/* "light-locker", NULL, */
-	"xss-lock", "slock", NULL,
+	"light-locker", NULL,
+	/* "xss-lock", "slock", NULL, */
 	"xfce4-power-manager", NULL,
 	"libinput-gestures", NULL,
 	"nm-applet", NULL,
 	"blueman-applet", NULL,
 	"/home/diamond/git/matebook-applet/matebook-applet", NULL,
 	"emacs", "--daemon", NULL,
-	"flatpak", "run", "com.dropbox.Client", NULL,
+	"dropbox", "start", "-i", NULL,
 	NULL /* terminate */
 };
 
@@ -184,6 +184,8 @@ static const Rule rules[] = {
 	RULE(.class = "Toplevel", .isfloating = 1)
 	RULE(.class = "Gnome-system-monitor", .isfloating = 1)
 	RULE(.class = "Xfce4-power-manager-settings", .isfloating = 1)
+	/* RULE(.class = "torbrowser", .isfloating = 1) */
+	RULE(.class = "torbrowser-launcher", .isfloating = 1)
 	RULE(.class = "Nm-connection-editor", .isfloating = 1)
 	RULE(.class = "Software-properties-gtk", .isfloating = 1)
 	RULE(.class = "Lightdm-gtk-greeter-settings", .isfloating = 1)
@@ -280,9 +282,9 @@ static const char *powerctl[] = { "sh", "/home/diamond/bin/powerprofiles.sh", NU
 static const char *statuscmd[] = { "sh", "/home/diamond/bin/statf", NULL };
 /* static const char *exitdwm[] = { "sh", "/home/diamond/bin/exitdwm", NULL }; */
 static const char *xkill[] = { "xkill", NULL };
-static const char *slockcmd[] = { "loginctl lock-session", NULL };
+/* static const char *slockcmd[] = { "loginctl lock-session", NULL }; */
 /* static const char *slockcmd[] = { "slock", NULL }; */
-/* static const char *slockcmd[] = { "light-locker-command -l", NULL }; */
+static const char *slockcmd[] = { "light-locker-command -l", NULL };
 static const char *windowcenter[] = { "sh", "/home/diamond/bin/windowcenter", NULL };
 static const char *toggle_compositor[] = { "sh", "/home/diamond/bin/dwm_tog_comp", NULL };
 static const char *dunst_dismiss[] = { "sh", "/home/diamond/bin/dunst_dismiss", NULL };
