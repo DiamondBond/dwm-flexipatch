@@ -83,7 +83,7 @@ static const char *const autostart[] = {
 	"hsetroot", "-solid", "dimgray", NULL,
 	"xrdb", "/home/diamond/.Xresources", NULL,
 	"dwmstatus", NULL,
-	"sh", "-c", "/home/diamond/bin/startcompositor", NULL,
+	"sh", "-c", "/home/diamond/bin/dwm_tog_comp", NULL,
 	"dunst", NULL,
 	/* "light-locker", NULL, */
 	"xss-lock", "slock", NULL,
@@ -92,9 +92,8 @@ static const char *const autostart[] = {
 	"nm-applet", NULL,
 	"blueman-applet", NULL,
 	"/home/diamond/git/matebook-applet/matebook-applet", NULL,
-	/* "pasystray", NULL, */
 	"emacs", "--daemon", NULL,
-	"dropbox", "start", "-i", NULL,
+	"flatpak", "run", "com.dropbox.Client", NULL,
 	NULL /* terminate */
 };
 
@@ -167,7 +166,7 @@ static const Rule rules[] = {
 	RULE(.class = "Pavucontrol", .isfloating = 1)
 	RULE(.title = "Library", .isfloating = 1)
 	RULE(.class = "Transmission-gtk", .isfloating = 1)
-	RULE(.class = "Xfce4-appfinder", .isfloating = 1)
+	RULE(.class = "krunner", .isfloating = 1)
 	RULE(.class = "TelegramDesktop", .isfloating = 1)
 	RULE(.class = "Galculator", .isfloating = 1)
 	RULE(.class = "Gpick", .isfloating = 1)
@@ -283,6 +282,7 @@ static const char *xkill[] = { "xkill", NULL };
 static const char *slockcmd[] = { "loginctl lock-session", NULL };
 /* static const char *slockcmd[] = { "slock", NULL }; */
 /* static const char *slockcmd[] = { "light-locker-command -l", NULL }; */
+static const char *windowcenter[] = { "sh", "/home/diamond/bin/windowcenter", NULL };
 static const char *toggle_compositor[] = { "sh", "/home/diamond/bin/dwm_tog_comp", NULL };
 static const char *dunst_dismiss[] = { "sh", "/home/diamond/bin/dunst_dismiss", NULL };
 static const char *killaccel[] = { "sh", "/home/diamond/bin/kmaccel", NULL };
@@ -360,6 +360,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_k,          movestack,              {.i = -1 } },
 	{ MODKEY,                       XK_Return,     zoom,                   {0} },
 	{ Mod4Mask,                     XK_Tab,        spawn,                  {.v = rofitab} },
+	{ Mod4Mask,                     XK_c,          spawn,                  {.v = windowcenter} },
 	{ MODKEY,                       XK_Tab,        view,                   {0} },
 	{ MODKEY|ControlMask,           XK_z,          showhideclient,         {0} },
 	{ MODKEY|ShiftMask,             XK_c,          killclient,             {0} },
