@@ -267,7 +267,7 @@ static const char *findercmd[]  = { "xfce4-appfinder", NULL };
 static const char *gmruncmd[]  = { "gmrun", NULL };
 static const char *xterm[]  = { "xterm", NULL };
 static const char *web[] = { "firefox", NULL };
-static const char *altweb[] = { "chromium", NULL };
+static const char *altweb[] = { "flatpak run com.github.Eloston.UngoogledChromium", NULL };
 static const char *shot[] = { "xfce4-screenshooter", "-f", NULL };
 static const char *winshot[] = { "scrot", NULL };
 static const char *selshot[] = { "xfce4-screenshooter", "-r", NULL };
@@ -312,7 +312,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_b,          togglebar,              {0} },
 	{ MODKEY|ControlMask,           XK_t,	   spawn,          {.v = xterm } },
 	{ MODKEY,						XK_w,	   spawn,	   	   {.v = web } },
-	{ MODKEY|ShiftMask,				XK_w,	   spawn,	   	   {.v = altweb } },
+	/* { Mod4Mask,				        XK_w,	   spawn,	   	   {.v = altweb } }, */
 	{ 0,							XK_Print,  spawn,	   	   {.v = shot } },
 	{ MODKEY,						XK_Print,  spawn,	   	   {.v = winshot } },
 	{ ShiftMask,	                XK_Print,  spawn,	   	   {.v = selshot } },
