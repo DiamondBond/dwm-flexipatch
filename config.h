@@ -79,13 +79,12 @@ static char *colors[][ColCount] = {
 
 
 static const char *const autostart[] = {
-	/* "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL, */
-	/* "sh", "-c", "/home/diamond/bin/disable_touchscreen.sh", NULL, */
-	/* "hsetroot", "-solid", "dimgray", NULL, */
+	"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL,
+	"sh", "-c", "/home/diamond/bin/dwmautostart.sh", NULL,
+	"hsetroot", "-solid", "#9b9b9b", NULL,
 	/* "feh", "--bg-scale", "/home/diamond/Pictures/Wallpapers/stars.jpg", NULL, */
-	/* "xrdb", "/home/diamond/.Xresources", NULL, */
 	"dwmstatus", NULL,
-	/* "sh", "-c", "/home/diamond/bin/dwm_tog_comp", NULL, */
+	"sh", "-c", "/home/diamond/bin/dwm_tog_comp", NULL,
 	"dunst", NULL,
 	/* "xss-lock", "slock", NULL, */
 	/* "light-locker", NULL, */
@@ -94,7 +93,6 @@ static const char *const autostart[] = {
 	"nm-applet", NULL,
 	"blueman-applet", NULL,
 	"/home/diamond/git/matebook-applet/matebook-applet", NULL,
-	"emacs", "--daemon", NULL,
 	"dropbox", "start", "-i", NULL,
 	NULL /* terminate */
 };
@@ -181,6 +179,7 @@ static const Rule rules[] = {
 	RULE(.class = "zoom", .isfloating = 1)
 	RULE(.class = "Gzdoom", .isfloating = 1)
 	RULE(.class = "Tk", .isfloating = 1)
+	RULE(.class = "gcr-prompter", .isfloating = 1)
 	RULE(.class = "openmw-launcher", .isfloating = 1)
 	RULE(.class = "Toplevel", .isfloating = 1)
 	RULE(.class = "Gnome-system-monitor", .isfloating = 1)
@@ -267,6 +266,7 @@ static const char *findercmd[]  = { "xfce4-appfinder", NULL };
 static const char *gmruncmd[]  = { "gmrun", NULL };
 static const char *xterm[]  = { "xterm", NULL };
 static const char *web[] = { "firefox", NULL };
+static const char *altweb[] = { "sh", "/home/diamond/bin/launchchromium.sh", NULL };
 static const char *shot[] = { "xfce4-screenshooter", "-f", NULL };
 static const char *winshot[] = { "scrot", NULL };
 static const char *selshot[] = { "xfce4-screenshooter", "-r", NULL };
@@ -307,10 +307,11 @@ static const char *brdown[] = { "sh", "/home/diamond/bin/changeBrightness", "5%-
 static Key keys[] = {
 	/* modifier                     key            function                argument */
 	{ MODKEY,                       XK_p,          spawn,                  {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return,     spawn,                  {.v = termcmd } },
+	{ MODKEY|ShiftMask,             XK_Return,     spawn,                  {.v = xterm } },
 	{ MODKEY,                       XK_b,          togglebar,              {0} },
-	{ MODKEY|ControlMask,           XK_t,	   spawn,          {.v = xterm } },
+	{ MODKEY|ControlMask,           XK_t,	   spawn,          {.v = termcmd } },
 	{ MODKEY,						XK_w,	   spawn,	   	   {.v = web } },
+	{ Mod4Mask,						XK_w,	   spawn,	   	   {.v = altweb } },
 	{ 0,							XK_Print,  spawn,	   	   {.v = shot } },
 	{ MODKEY,						XK_Print,  spawn,	   	   {.v = winshot } },
 	{ ShiftMask,	                XK_Print,  spawn,	   	   {.v = selshot } },
@@ -366,7 +367,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Tab,        view,                   {0} },
 	{ MODKEY|ControlMask,           XK_z,          showhideclient,         {0} },
 	{ MODKEY|ShiftMask,             XK_c,          killclient,             {0} },
-	{ MODKEY|ShiftMask,             XK_q,          quit,                   {0} },
+	{ MODKEY|ControlMask|ShiftMask, XK_q,          quit,                   {0} },
 	{ MODKEY,                       XK_t,          setlayout,              {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,          setlayout,              {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,          setlayout,              {.v = &layouts[2]} },
