@@ -89,7 +89,7 @@ static const char *const autostart[] = {
 	/* "xss-lock", "slock", NULL, */
 	/* "light-locker", NULL, */
 	"xfce4-power-manager", NULL,
-	"libinput-gestures", NULL,
+	/* "libinput-gestures", NULL, */
 	"nm-applet", NULL,
 	"blueman-applet", NULL,
 	"/home/diamond/git/matebook-applet/matebook-applet", NULL,
