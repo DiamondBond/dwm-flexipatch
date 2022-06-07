@@ -81,10 +81,10 @@ static char *colors[][ColCount] = {
 static const char *const autostart[] = {
 	"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL,
 	"sh", "-c", "/home/diamond/bin/dwmautostart.sh", NULL,
-	"hsetroot", "-solid", "#9b9b9b", NULL,
+	/* "hsetroot", "-solid", "#9b9b9b", NULL, */
 	/* "feh", "--bg-scale", "/home/diamond/Pictures/Wallpapers/stars.jpg", NULL, */
 	"dwmstatus", NULL,
-	"sh", "-c", "/home/diamond/bin/dwm_tog_comp", NULL,
+	/* "sh", "-c", "/home/diamond/bin/dwm_tog_comp", NULL, */
 	"dunst", NULL,
 	/* "xss-lock", "slock", NULL, */
 	/* "light-locker", NULL, */
