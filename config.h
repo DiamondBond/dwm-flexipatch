@@ -174,7 +174,7 @@ static const Rule rules[] = {
 	RULE(.class = "Blueman-manager", .isfloating = 1)
 	RULE(.class = "Gparted", .isfloating = 1)
 	RULE(.class = "Cheese", .isfloating = 1)
-	RULE(.class = "XTerm", .isfloating = 1)
+	RULE(.class = "Xfce4-terminal", .isfloating = 1)
 	RULE(.class = "Steam", .isfloating = 1)
 	RULE(.class = "zoom", .isfloating = 1)
 	RULE(.class = "Gzdoom", .isfloating = 1)
