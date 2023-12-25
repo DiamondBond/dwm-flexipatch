@@ -944,6 +944,7 @@ static const char *slockcmd[] = { "slock", NULL };
 static const char *windowcenter[] = { "sh", "/home/diamond/bin/windowcenter", NULL };
 static const char *toggle_compositor[] = { "sh", "/home/diamond/bin/dwm_tog_comp", NULL };
 static const char *dunst_dismiss[] = { "sh", "/home/diamond/bin/dunst_dismiss", NULL };
+static const char *quitdwm[] = { "killall", "-p", "dwm", NULL };
 #if BAR_STATUSCMD_PATCH
 #if BAR_DWMBLOCKS_PATCH
 /* This defines the name of the executable that handles the bar (used for signalling purposes) */
@@ -1129,7 +1130,7 @@ static const Key keys[] = {
 	#endif // SELFRESTART_PATCH
 	/* { MODKEY|ShiftMask,             XK_q,          quit,                   {0} }, */
 	#if RESTARTSIG_PATCH
-	{ MODKEY|ControlMask|ShiftMask, XK_q,          quit,                   {1} },
+	{ MODKEY|ControlMask|ShiftMask, XK_r,          quit,                   {1} },
 	#endif // RESTARTSIG_PATCH
 	#if FOCUSURGENT_PATCH
 	{ MODKEY,                       XK_u,          focusurgent,            {0} },
@@ -1412,6 +1413,7 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,           XK_z,          showhideclient,         {0} },
 	{ MODKEY|ShiftMask,             XK_c,          killclient,             {0} },
 	/* { MODKEY|ControlMask|ShiftMask, XK_q,          quit,                   {0} }, */
+	{ MODKEY|ControlMask|ShiftMask, XK_q,		   spawn,				   {.v = quitdwm }},
 	{ MODKEY,                       XK_t,          setlayout,              {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,          setlayout,              {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,          setlayout,              {.v = &layouts[2]} },
