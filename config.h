@@ -947,6 +947,7 @@ static const char *slockcmd[] = { "slock", NULL };
 static const char *windowcenter[] = { "sh", "/home/diamond/bin/windowcenter", NULL };
 static const char *toggle_compositor[] = { "sh", "/home/diamond/bin/dwm_tog_comp", NULL };
 static const char *dunst_dismiss[] = { "sh", "/home/diamond/bin/dunst_dismiss", NULL };
+static const char *dunst_toggle[] = { "sh", "/home/diamond/bin/dunst_toggle", NULL };
 static const char *quitdwm[] = { "killall", "-p", "dwm", NULL };
 #if BAR_STATUSCMD_PATCH
 #if BAR_DWMBLOCKS_PATCH
@@ -1378,6 +1379,7 @@ static const Key keys[] = {
 	{ Mod4Mask,						XK_e,      spawn,	  	   {.v = emacs } },
 	{ Mod4Mask,						XK_space,  spawn,	  	   {.v = roficmd } },
 	{ Mod4Mask|ControlMask,			XK_space,  spawn,	  	   {.v = dunst_dismiss } },
+	{ Mod4Mask|ShiftMask,			XK_space,  spawn,	  	   {.v = dunst_toggle } },
 	{ Mod4Mask,						XK_d,      spawn,	  	   {.v = desktop } },
 	/* { Mod4Mask,						XK_m,      spawn,	  	   {.v = music } }, */
 	{ Mod4Mask,						XK_v,      spawn,	  	   {.v = mpv } },
