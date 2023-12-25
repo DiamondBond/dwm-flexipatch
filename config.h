@@ -15,7 +15,7 @@ static const unsigned int barborderpx    = 0;  /* border pixel of bar */
 #endif // BAR_BORDER_PATCH
 static const unsigned int snap           = 15;  /* snap pixel */
 #if SWALLOW_PATCH
-static const int swallowfloating         = 0;   /* 1 means swallow floating windows by default */
+static const int swallowfloating         = 1;   /* 1 means swallow floating windows by default */
 #endif // SWALLOW_PATCH
 #if BAR_TAGPREVIEW_PATCH
 static const int scalepreview            = 4;        /* Tag preview scaling */
@@ -78,7 +78,7 @@ static const char slopspawnstyle[]       = "-t 0 -c 0.92,0.85,0.69,0.3 -o"; /* d
 static const char slopresizestyle[]      = "-t 0 -c 0.92,0.85,0.69,0.3"; /* do NOT define -f (format) here */
 static const int riodraw_borders         = 0;  /* 0 or 1, indicates whether the area drawn using slop includes the window borders */
 #if SWALLOW_PATCH
-static const int riodraw_matchpid        = 1;  /* 0 or 1, indicates whether to match the PID of the client that was spawned with riospawn */
+static const int riodraw_matchpid        = 0;  /* 0 or 1, indicates whether to match the PID of the client that was spawned with riospawn */
 #endif // SWALLOW_PATCH
 #endif // RIODRAW_PATCH
 /* Status is to be shown on: -1 (all monitors), 0 (a specific monitor by index), 'A' (active monitor) */
@@ -538,6 +538,7 @@ static const Rule rules[] = {
 	RULE(.class = "gcr-prompter", .isfloating = 1)
 	RULE(.class = "openmw-launcher", .isfloating = 1)
 	RULE(.class = "Toplevel", .isfloating = 1)
+	RULE(.class = "BleachBit", .isfloating = 1)
 	RULE(.class = "Gnome-system-monitor", .isfloating = 1)
 	RULE(.class = "Xfce4-power-manager-settings", .isfloating = 1)
 	/* RULE(.class = "torbrowser", .isfloating = 1) */
@@ -926,12 +927,9 @@ static const char *gmruncmd[]  = { "gmrun", NULL };
 static const char *web[] = { "firefox", NULL };
 static const char *altweb[] = { "chromium", NULL };
 static const char *sysmon[] = { "gnome-system-monitor", NULL };
-static const char *shot[] = { "sh", "-c", "scrot -f ~/Desktop/%b%d_%H%M%S.png", NULL };
-static const char *winshot[] = { "sh", "-c", "scrot -u -b ~/Desktop/%b%d_%H%M%S.png", NULL };
-static const char *selshot[] = { "sh", "-c", "scrot -s -b ~/Desktop/%b%d_%H%M%S.png", NULL };
-/* static const char *shot[] = { "scrot", "-f", "/home/diamond/Desktop/%b%d_%H%M%S.png", NULL }; */
-/* static const char *winshot[] = { "scrot", "-u", "-b", "/home/diamond/Desktop/%b%d_%H%M%S.png", NULL }; */
-/* static const char *selshot[] = { "scrot", "-s", "-b", "/home/diamond/Desktop/%b%d_%H%M%S.png", NULL }; */
+static const char *shot[] = { "sh", "-c", "scrot -e 'xclip -selection clipboard -t image/png -i $f'", NULL };
+static const char *winshot[] = { "sh", "-c", "scrot -u -b -e 'xclip -selection clipboard -t image/png -i $f'", NULL };
+static const char *selshot[] = { "sh", "-c", "scrot -s -b -e 'xclip -selection clipboard -t image/png -i $f'", NULL };
 static const char *explorer[] = { "thunar", NULL };
 static const char *desktop[] = { "thunar", "/home/diamond/Desktop", NULL };
 static const char *emacs[] = { "emacsclient", "-c","-n","-a","'emacs'", NULL };

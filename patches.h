@@ -1014,7 +1014,7 @@
  * feature in i3wm.
  * https://github.com/GasparVardanyan/dwm-scratchpad
  */
-#define SCRATCHPAD_ALT_1_PATCH 0
+#define SCRATCHPAD_ALT_1_PATCH 1
 
 /* This patch persists some settings across window manager restarts. These include but are not
  * limited to:
