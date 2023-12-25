@@ -412,7 +412,7 @@ static const char *layoutmenu_cmd = "layoutmenu.sh";
 #if COOL_AUTOSTART_PATCH
 static const char *const autostart[] = {
 	"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL,
-	"/usr/bin/nvidia-settings -a '[gpu:0]/GpuPowerMizerMode=1'", NULL,
+	/* "/usr/bin/nvidia-settings -a '[gpu:0]/GpuPowerMizerMode=1'", NULL, */
 	"sh", "-c", "/home/diamond/bin/dwmautostart.sh", NULL,
 	/* "hsetroot", "-solid", "#9b9b9b", NULL, */
 	/* "feh", "--bg-scale", "/home/diamond/Pictures/Wallpapers/stars.jpg", NULL, */
