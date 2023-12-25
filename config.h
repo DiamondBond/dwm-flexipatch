@@ -548,6 +548,9 @@ static const Rule rules[] = {
 	RULE(.class = "Lightdm-gtk-greeter-settings", .isfloating = 1)
 	RULE(.class = "battle.net.exe", .isfloating = 1)
 	RULE(.class = "ealaunchhelper.exe", .isfloating = 1)
+	RULE(.class = "nvidia-settings", .isfloating = 1)
+	RULE(.class = "Gwe", .isfloating = 1)
+
 	#if RENAMED_SCRATCHPADS_PATCH
 	RULE(.instance = "spterm", .scratchkey = 's', .isfloating = 1)
 	#elif SCRATCHPADS_PATCH
