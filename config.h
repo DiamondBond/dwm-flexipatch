@@ -26,8 +26,8 @@ static int nomodbuttons                  = 1;   /* allow client mouse button bin
 #if VANITYGAPS_PATCH
 static const unsigned int gappih         = 20;  /* horiz inner gap between windows */
 static const unsigned int gappiv         = 10;  /* vert inner gap between windows */
-static const unsigned int gappoh         = 10;  /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov         = 30;  /* vert outer gap between windows and screen edge */
+static const unsigned int gappoh         = 8;  /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov         = 8;  /* vert outer gap between windows and screen edge */
 static const int smartgaps_fact          = 1;   /* gap factor when there is only one client; 0 = no gaps, 3 = 3x outer gaps */
 #endif // VANITYGAPS_PATCH
 #if AUTOSTART_PATCH
@@ -94,7 +94,7 @@ static const int horizpadbar             = 2;   /* horizontal padding for status
 static const int vertpadbar              = 0;   /* vertical padding for statusbar */
 #endif // BAR_STATUSPADDING_PATCH
 #if BAR_STATUSBUTTON_PATCH
-static const char buttonbar[]            = "<O>";
+static const char buttonbar[]            = "ツ";
 #endif // BAR_STATUSBUTTON_PATCH
 #if BAR_SYSTRAY_PATCH
 static const unsigned int systrayspacing = 8;   /* systray spacing */
@@ -513,17 +513,16 @@ static const Rule rules[] = {
 	RULE(.class = "Event Tester", .isfloating = 1)
 	RULE(.class = "Pavucontrol", .isfloating = 1)
 	RULE(.title = "Library", .isfloating = 1)
-	RULE(.class = "Transmission-gtk", .isfloating = 1)
+	RULE(.class = "Transmission", .isfloating = 1)
 	RULE(.class = "Xfce4-appfinder", .isfloating = 1)
 	RULE(.class = "TelegramDesktop", .isfloating = 1)
 	RULE(.class = "Galculator", .isfloating = 1)
 	RULE(.class = "Gpick", .isfloating = 1)
-	RULE(.class = "Gnome-calendar", .isfloating = 1)
+	RULE(.class = "gnome-calendar", .isfloating = 1)
 	RULE(.class = "Blueman-manager", .isfloating = 1)
-	RULE(.class = "Gparted", .isfloating = 1)
 	RULE(.class = "Cheese", .isfloating = 1)
 	/* RULE(.class = "Xfce4-terminal", .isfloating = 1) */
-	RULE(.class = "Steam", .isfloating = 1)
+	/* RULE(.class = "Steam", .isfloating = 1) */
 	RULE(.class = "zoom", .isfloating = 1)
 	RULE(.class = "Gzdoom", .isfloating = 1)
 	RULE(.class = "Tk", .isfloating = 1)
@@ -541,7 +540,7 @@ static const Rule rules[] = {
 	RULE(.class = "Lightdm-gtk-greeter-settings", .isfloating = 1)
 	RULE(.class = "battle.net.exe", .isfloating = 1)
 	RULE(.class = "ealaunchhelper.exe", .isfloating = 1)
-	RULE(.class = "nvidia-settings", .isfloating = 1)
+	RULE(.class = "Nvidia-settings", .isfloating = 1)
 	RULE(.class = "Gwe", .isfloating = 1)
 
 	#if RENAMED_SCRATCHPADS_PATCH
@@ -1387,7 +1386,7 @@ static const Key keys[] = {
 	{ MODKEY,						XK_F3,     spawn,	  	   {.v = findercmd } },
 	{ MODKEY|ControlMask,			XK_p,	   spawn,	  	   {.v = mixer } },
 	{ MODKEY|ShiftMask,				XK_F12,    spawn,	  	   {.v = toggle_compositor } },
-	{ MODKEY,						XK_x,      spawn,	  	   {.v = xkill } },
+	{ Mod4Mask,						XK_x,      spawn,	  	   {.v = xkill } },
 	{ MODKEY|ControlMask,           XK_Right,  shiftview,  { .i = +1 } },
 	{ MODKEY|ControlMask,           XK_Left,   shiftview,  { .i = -1 } },
 	{ MODKEY,                       XK_grave,      showhideclient,                {0} },
@@ -1426,11 +1425,6 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_o,          setlayout,              {.v = &layouts[4]} },
 	{ MODKEY,                       XK_space,      setlayout,              {0} },
 	{ MODKEY|ShiftMask,             XK_space,      togglefloating,         {0} },
-	{ MODKEY|ControlMask|ShiftMask, XK_h,          togglehorizontalmax,    {0} },
-	{ MODKEY|ControlMask|ShiftMask, XK_l,          togglehorizontalmax,    {0} },
-	{ MODKEY|ControlMask|ShiftMask, XK_j,          toggleverticalmax,      {0} },
-	{ MODKEY|ControlMask|ShiftMask, XK_k,          toggleverticalmax,      {0} },
-	{ MODKEY|ControlMask,           XK_m,          togglemax,              {0} },
 	{ MODKEY,                       XK_0,          view,                   {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,          tag,                    {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,      focusmon,               {.i = -1 } },
@@ -1483,7 +1477,7 @@ static const Command commands[] = {
 static const Button buttons[] = {
 	/* click                event mask           button          function        argument */
 	#if BAR_STATUSBUTTON_PATCH
-	{ ClkButton,            0,                   Button1,        spawn,          {.v = dmenucmd } },
+	{ ClkButton,            0,                   Button1,        spawn,          {.v = findercmd } },
 	#endif // BAR_STATUSBUTTON_PATCH
 	{ ClkLtSymbol,          0,                   Button1,        setlayout,      {0} },
 	#if BAR_LAYOUTMENU_PATCH
@@ -1493,6 +1487,7 @@ static const Button buttons[] = {
 	#endif // BAR_LAYOUTMENU_PATCH
 	#if BAR_WINTITLEACTIONS_PATCH
 	{ ClkWinTitle,          0,                   Button1,        togglewin,      {0} },
+	{ ClkWinTitle,          0,                   Button2,        killclient, 	 {0} },
 	{ ClkWinTitle,          0,                   Button3,        showhideclient, {0} },
 	#endif // BAR_WINTITLEACTIONS_PATCH
 	{ ClkWinTitle,          0,                   Button2,        zoom,           {0} },
