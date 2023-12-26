@@ -13,7 +13,7 @@ static const unsigned int borderpx       = 1;   /* border pixel of windows */
  * automatically update with setborderpx. */
 static const unsigned int barborderpx    = 0;  /* border pixel of bar */
 #endif // BAR_BORDER_PATCH
-static const unsigned int snap           = 15;  /* snap pixel */
+static const unsigned int snap           = 10;  /* snap pixel */
 #if SWALLOW_PATCH
 static const int swallowfloating         = 1;   /* 1 means swallow floating windows by default */
 #endif // SWALLOW_PATCH
@@ -170,51 +170,45 @@ static const char dmenufont[]       = "terminus:size=10";
 
 static char c000000[]                    = "#000000"; // placeholder value
 
-static char normfgcolor[]                = "#bbbbbb";
-static char normbgcolor[]                = "#222222";
+static char normfgcolor[]                = "#ffffff";
+static char normbgcolor[]                = "#000000";
 static char normbordercolor[]            = "#444444";
-static char normfloatcolor[]             = "#db8fd9";
+static char normfloatcolor[]             = "#000000";
 
-static char selfgcolor[]                 = "#eeeeee";
-static char selbgcolor[]                 = "#005577";
-static char selbordercolor[]             = "#005577";
-static char selfloatcolor[]              = "#005577";
+static char selfgcolor[]                 = "#000000";
+static char selbgcolor[]                 = "#aaaaaa";
+static char selbordercolor[]             = "#ffffff";
+static char selfloatcolor[]              = "#505050";
 
-static char titlenormfgcolor[]           = "#bbbbbb";
-static char titlenormbgcolor[]           = "#222222";
-static char titlenormbordercolor[]       = "#444444";
-static char titlenormfloatcolor[]        = "#db8fd9";
+static char titlenormfgcolor[]           = "#ffffff";
+static char titlenormbgcolor[]           = "#000000";
+static char titlenormbordercolor[]       = "#ffffff";
+static char titlenormfloatcolor[]        = "#ffffff";
 
-static char titleselfgcolor[]            = "#eeeeee";
-static char titleselbgcolor[]            = "#005577";
-static char titleselbordercolor[]        = "#005577";
-static char titleselfloatcolor[]         = "#005577";
+static char titleselfgcolor[]            = "#ffffff";
+static char titleselbgcolor[]            = "#505050";
+static char titleselbordercolor[]        = "#ffffff";
+static char titleselfloatcolor[]         = "#ffffff";
 
-static char tagsnormfgcolor[]            = "#bbbbbb";
-static char tagsnormbgcolor[]            = "#222222";
-static char tagsnormbordercolor[]        = "#444444";
-static char tagsnormfloatcolor[]         = "#db8fd9";
+static char tagsnormfgcolor[]            = "#ffffff";
+static char tagsnormbgcolor[]            = "#000000";
+static char tagsnormbordercolor[]        = "#ffffff";
+static char tagsnormfloatcolor[]         = "#ffffff";
 
-static char tagsselfgcolor[]             = "#eeeeee";
-static char tagsselbgcolor[]             = "#005577";
-static char tagsselbordercolor[]         = "#005577";
-static char tagsselfloatcolor[]          = "#005577";
+static char tagsselfgcolor[]             = "#ffffff";
+static char tagsselbgcolor[]             = "#505050";
+static char tagsselbordercolor[]         = "#ffffff";
+static char tagsselfloatcolor[]          = "#ffffff";
 
-static char hidnormfgcolor[]             = "#005577";
-static char hidselfgcolor[]              = "#227799";
-static char hidnormbgcolor[]             = "#222222";
+static char hidnormfgcolor[]             = "#bbbbbb";
+static char hidselfgcolor[]              = "#ffffff";
+static char hidnormbgcolor[]             = "#000000";
 static char hidselbgcolor[]              = "#222222";
 
 static char urgfgcolor[]                 = "#bbbbbb";
 static char urgbgcolor[]                 = "#222222";
 static char urgbordercolor[]             = "#ff0000";
 static char urgfloatcolor[]              = "#db8fd9";
-
-/* static const char col_gray1[]       = "#000000"; */
-/* static const char col_gray2[]       = "#AAAAAA"; */
-/* static const char col_gray3[]       = "#ffffff"; */
-/* static const char col_gray4[]       = "#ffffff"; */
-/* static const char col_cyan[]        = "#000000"; */
 
 #if RENAMED_SCRATCHPADS_PATCH
 static char scratchselfgcolor[]          = "#FFF7D4";
@@ -340,8 +334,6 @@ static char *colors[][ColCount] = {
 	/*                       fg                bg                border                float */
 	[SchemeNorm]         = { normfgcolor,      normbgcolor,      normbordercolor,      normfloatcolor },
 	[SchemeSel]          = { selfgcolor,       selbgcolor,       selbordercolor,       selfloatcolor },
-	/* [SchemeNorm]         = { col_gray3,      col_gray1,      col_gray2,      col_gray2 }, */
-	/* [SchemeSel]          = { col_gray4,       col_cyan,       col_cyan,       col_cyan }, */
 	[SchemeTitleNorm]    = { titlenormfgcolor, titlenormbgcolor, titlenormbordercolor, titlenormfloatcolor },
 	[SchemeTitleSel]     = { titleselfgcolor,  titleselbgcolor,  titleselbordercolor,  titleselfloatcolor },
 	[SchemeTagsNorm]     = { tagsnormfgcolor,  tagsnormbgcolor,  tagsnormbordercolor,  tagsnormfloatcolor },
@@ -470,7 +462,7 @@ static char tagicons[][NUMTAGS][MAX_TAGLEN] =
 static char *tagicons[][NUMTAGS] =
 #endif // NAMETAG_PATCH
 {
-	[DEFAULT_TAGS]        = { "1", "2", "3", "4", "5", "6", "7", "8", "9" },
+	[DEFAULT_TAGS]        = { "一", "二", "三", "四", "五", "六", "七", "八", "九" },
 	[ALTERNATIVE_TAGS]    = { "A", "B", "C", "D", "E", "F", "G", "H", "I" },
 	[ALT_TAGS_DECORATION] = { "<1>", "<2>", "<3>", "<4>", "<5>", "<6>", "<7>", "<8>", "<9>" },
 };
@@ -539,6 +531,7 @@ static const Rule rules[] = {
 	RULE(.class = "openmw-launcher", .isfloating = 1)
 	RULE(.class = "Toplevel", .isfloating = 1)
 	RULE(.class = "BleachBit", .isfloating = 1)
+	RULE(.class = "lutris", .isfloating = 1)
 	RULE(.class = "Gnome-system-monitor", .isfloating = 1)
 	RULE(.class = "Xfce4-power-manager-settings", .isfloating = 1)
 	/* RULE(.class = "torbrowser", .isfloating = 1) */
@@ -949,6 +942,7 @@ static const char *toggle_compositor[] = { "sh", "/home/diamond/bin/dwm_tog_comp
 static const char *dunst_dismiss[] = { "sh", "/home/diamond/bin/dunst_dismiss", NULL };
 static const char *dunst_toggle[] = { "sh", "/home/diamond/bin/dunst_toggle", NULL };
 static const char *quitdwm[] = { "killall", "-p", "dwm", NULL };
+static const char *recompdwm[] = { "sh", "-c", "/home/diamond/bin/recomp_dwm", NULL };
 #if BAR_STATUSCMD_PATCH
 #if BAR_DWMBLOCKS_PATCH
 /* This defines the name of the executable that handles the bar (used for signalling purposes) */
@@ -1419,6 +1413,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_c,          killclient,             {0} },
 	/* { MODKEY|ControlMask|ShiftMask, XK_q,          quit,                   {0} }, */
 	{ MODKEY|ControlMask|ShiftMask, XK_q,		   spawn,				   {.v = quitdwm }},
+	{ Mod4Mask,						XK_r,		   spawn,				   {.v = recompdwm }},
 	{ MODKEY,                       XK_t,          setlayout,              {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,          setlayout,              {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,          setlayout,              {.v = &layouts[2]} },
