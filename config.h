@@ -921,18 +921,21 @@ static const char *xfceterm[]  = { "xfce4-terminal", NULL };
 static const char *findercmd[]  = { "xfce4-appfinder", NULL };
 static const char *gmruncmd[]  = { "gmrun", NULL };
 static const char *web[] = { "firefox", NULL };
-static const char *altweb[] = { "chromium", NULL };
+static const char *altweb[] = { "/usr/bin/chromium", "--ignore-gpu-blacklist", "--enable-gpu-rasterization", "--enable-native-gpu-memory-buffers", NULL };
 static const char *sysmon[] = { "gnome-system-monitor", NULL };
 static const char *shot[] = { "sh", "-c", "scrot -e 'xclip -selection clipboard -t image/png -i $f'", NULL };
 static const char *winshot[] = { "sh", "-c", "scrot -u -b -e 'xclip -selection clipboard -t image/png -i $f'", NULL };
 static const char *selshot[] = { "sh", "-c", "scrot -s -b -e 'xclip -selection clipboard -t image/png -i $f'", NULL };
 static const char *explorer[] = { "thunar", NULL };
-static const char *desktop[] = { "thunar", "/home/diamond/Desktop", NULL };
+/* static const char *desktop[] = { "thunar", "/home/diamond/Desktop", NULL }; */
 static const char *emacs[] = { "emacsclient", "-c","-n","-a","'emacs'", NULL };
 static const char *mixer[] = { "pavucontrol", NULL };
 static const char *calc[] = { "galculator", NULL };
 static const char *mpv[] = { "mpv", "--player-operation-mode=pseudo-gui", NULL };
-/* static const char *music[] = { "sh", "/home/diamond/bin/launchspotify.sh", NULL }; */
+static const char *code[] = { "/usr/bin/code", "--unity-launch", "--ignore-gpu-blacklist", "--enable-gpu-rasterization", "--enable-native-gpu-memory-buffers", NULL };
+static const char *spotify[] = { "sh", "/home/diamond/bin/launchspotify.sh", NULL };
+static const char *discord[] = { "/usr/bin/discord", "--ignore-gpu-blocklist", "disable-features=UseOzonePlatform", "--enable-features=VaapiVideoDecoder", "--use-gl=desktop", "--enable-gpu-rasterization", "--enable-zero-copy", "--no-sandbox", NULL };
+static const char *discord_ss[] = { "/usr/bin/flatpak", "run", "--branch=stable", "--arch=x86_64", "--command=discord-screenaudio", "de.shorsh.discord-screenaudio", NULL };
 static const char *xkill[] = { "xkill", NULL };
 /* static const char *slockcmd[] = { "loginctl lock-session", NULL }; */
 static const char *slockcmd[] = { "slock", NULL };
@@ -1374,15 +1377,17 @@ static const Key keys[] = {
 	{ Mod4Mask,						XK_space,  spawn,	  	   {.v = roficmd } },
 	{ Mod4Mask|ControlMask,			XK_space,  spawn,	  	   {.v = dunst_dismiss } },
 	{ Mod4Mask|ShiftMask,			XK_space,  spawn,	  	   {.v = dunst_toggle } },
-	{ Mod4Mask,						XK_d,      spawn,	  	   {.v = desktop } },
-	/* { Mod4Mask,						XK_m,      spawn,	  	   {.v = music } }, */
-	{ Mod4Mask,						XK_v,      spawn,	  	   {.v = mpv } },
+	{ Mod4Mask,						XK_d,      spawn,	  	   {.v = discord } },
+	{ Mod4Mask|ShiftMask,			XK_d,      spawn,	  	   {.v = discord_ss } },
+	{ Mod4Mask,						XK_m,      spawn,	  	   {.v = spotify } },
+	{ Mod4Mask,						XK_v,      spawn,	  	   {.v = code } },
+	{ Mod4Mask|ShiftMask,			XK_v,      spawn,	  	   {.v = mpv } },
 	{ Mod4Mask,						XK_g,      spawn,	  	   {.v = calc } },
 	{ MODKEY,						XK_F2,     spawn,	  	   {.v = gmruncmd } },
 	{ MODKEY,						XK_F3,     spawn,	  	   {.v = findercmd } },
 	{ MODKEY|ControlMask,			XK_p,	   spawn,	  	   {.v = mixer } },
 	{ MODKEY|ShiftMask,				XK_F12,    spawn,	  	   {.v = toggle_compositor } },
-	{ MODKEY|ShiftMask,				XK_x,      spawn,	  	   {.v = xkill } },
+	{ MODKEY,						XK_x,      spawn,	  	   {.v = xkill } },
 	{ MODKEY|ControlMask,           XK_Right,  shiftview,  { .i = +1 } },
 	{ MODKEY|ControlMask,           XK_Left,   shiftview,  { .i = -1 } },
 	{ MODKEY,                       XK_grave,      showhideclient,                {0} },
