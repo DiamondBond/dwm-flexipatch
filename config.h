@@ -514,7 +514,7 @@ static const Rule rules[] = {
 	RULE(.class = "Event Tester", .isfloating = 1)
 	RULE(.class = "Pavucontrol", .isfloating = 1)
 	RULE(.title = "Library", .isfloating = 1)
-	RULE(.class = "Transmission", .isfloating = 1)
+	RULE(.class = "transmission-gtk", .isfloating = 1)
 	RULE(.class = "Xfce4-appfinder", .isfloating = 1)
 	RULE(.class = "TelegramDesktop", .isfloating = 1)
 	RULE(.class = "Galculator", .isfloating = 1)
@@ -531,10 +531,13 @@ static const Rule rules[] = {
 	RULE(.class = "openmw-launcher", .isfloating = 1)
 	RULE(.class = "Toplevel", .isfloating = 1)
 	RULE(.class = "BleachBit", .isfloating = 1)
+	RULE(.class = "ProtonUp-Qt", .isfloating = 1)
 	RULE(.class = "lutris", .isfloating = 1)
+	RULE(.class = "Lutris", .isfloating = 1)
 	RULE(.class = "Gnome-system-monitor", .isfloating = 1)
 	RULE(.class = "Xfce4-power-manager-settings", .isfloating = 1)
 	/* RULE(.class = "torbrowser", .isfloating = 1) */
+	RULE(.class = "Engrampa", .isfloating = 1)
 	RULE(.class = "torbrowser-launcher", .isfloating = 1)
 	RULE(.class = "Nm-connection-editor", .isfloating = 1)
 	RULE(.class = "Software-properties-gtk", .isfloating = 1)
@@ -543,6 +546,8 @@ static const Rule rules[] = {
 	RULE(.class = "ealaunchhelper.exe", .isfloating = 1)
 	RULE(.class = "Nvidia-settings", .isfloating = 1)
 	RULE(.class = "Gwe", .isfloating = 1)
+	RULE(.class = "Thunar", .isfloating = 1)
+	RULE(.class = "Gnome-disks", .isfloating = 1)
 
 	#if RENAMED_SCRATCHPADS_PATCH
 	RULE(.instance = "spterm", .scratchkey = 's', .isfloating = 1)
@@ -1397,6 +1402,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_d,          incnmaster,             {.i = -1 } },
 	{ MODKEY,                       XK_h,          setmfact,               {.f = -0.05} },
 	{ MODKEY,                       XK_l,          setmfact,               {.f = +0.05} },
+	{ Mod4Mask,                     XK_equal,      setmfact,               {.f = 1.50} },
+	{ Mod4Mask|ShiftMask,           XK_equal,      setmfact,               {.f = 1.55} },
 	{ MODKEY,                       XK_Return,     zoom,                   {0} },
 	{ Mod4Mask,                     XK_Tab,        spawn,                  {.v = rofitab} },
 	{ Mod4Mask,                     XK_c,          spawn,                  {.v = windowcenter} },
