@@ -548,6 +548,7 @@ static const Rule rules[] = {
 	RULE(.class = "Gwe", .isfloating = 1)
 	RULE(.class = "Thunar", .isfloating = 1)
 	RULE(.class = "Gnome-disks", .isfloating = 1)
+	RULE(.class = "Mousepad", .isfloating = 1)
 
 	#if RENAMED_SCRATCHPADS_PATCH
 	RULE(.instance = "spterm", .scratchkey = 's', .isfloating = 1)
