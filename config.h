@@ -28,7 +28,7 @@ static const unsigned int gappih         = 10;  /* horiz inner gap between windo
 static const unsigned int gappiv         = 10;  /* vert inner gap between windows */
 static const unsigned int gappoh         = 8;  /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov         = 8;  /* vert outer gap between windows and screen edge */
-static const int smartgaps_fact          = 1;   /* gap factor when there is only one client; 0 = no gaps, 3 = 3x outer gaps */
+static const int smartgaps_fact          = 0;   /* gap factor when there is only one client; 0 = no gaps, 3 = 3x outer gaps */
 #endif // VANITYGAPS_PATCH
 #if AUTOSTART_PATCH
 static const char autostartblocksh[]     = "autostart_blocking.sh";
@@ -549,6 +549,8 @@ static const Rule rules[] = {
 	RULE(.class = "Thunar", .isfloating = 1)
 	RULE(.class = "Gnome-disks", .isfloating = 1)
 	RULE(.class = "Mousepad", .isfloating = 1)
+	RULE(.class = "control.exe", .isfloating = 1)
+	RULE(.class = "notepad.exe", .isfloating = 1)
 
 	#if RENAMED_SCRATCHPADS_PATCH
 	RULE(.instance = "spterm", .scratchkey = 's', .isfloating = 1)
@@ -952,6 +954,10 @@ static const char *dunst_dismiss[] = { "sh", "/home/diamond/bin/dunst_dismiss", 
 static const char *dunst_toggle[] = { "sh", "/home/diamond/bin/dunst_toggle", NULL };
 static const char *quitdwm[] = { "killall", "-p", "dwm", NULL };
 static const char *recompdwm[] = { "sh", "-c", "/home/diamond/bin/recomp_dwm", NULL };
+static const char *emoji[] = { "sh", "-c", "/home/diamond/.config/rofi/emoji/emoji.pl", NULL };
+static const char *bookmarks[] = { "sh", "-c", "/home/diamond/.config/rofi/browser/browser_menu.pl", NULL };
+static const char *powermenu[] = { "sh", "-c", "/home/diamond/.config/rofi/powermenu/powermenu.sh", NULL };
+static const char *applaunch[] = { "sh", "-c", "/home/diamond/.config/rofi/applaunch/launcher.sh", NULL };
 #if BAR_STATUSCMD_PATCH
 #if BAR_DWMBLOCKS_PATCH
 /* This defines the name of the executable that handles the bar (used for signalling purposes) */
@@ -1394,6 +1400,9 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,			XK_p,	   spawn,	  	   {.v = mixer } },
 	{ MODKEY|ShiftMask,				XK_F12,    spawn,	  	   {.v = toggle_compositor } },
 	{ Mod4Mask,						XK_x,      spawn,	  	   {.v = xkill } },
+	{ Mod4Mask,						XK_b,      spawn,	  	   {.v = bookmarks } },
+	{ Mod4Mask,						XK_period, spawn,	  	   {.v = emoji } },
+	{ MODKEY|ControlMask,			XK_Delete, spawn,	  	   {.v = powermenu } },
 	{ MODKEY|ControlMask,           XK_Right,  shiftview,  { .i = +1 } },
 	{ MODKEY|ControlMask,           XK_Left,   shiftview,  { .i = -1 } },
 	{ MODKEY,                       XK_grave,      showhideclient,                {0} },
@@ -1472,7 +1481,7 @@ static const Command commands[] = {
 static const Button buttons[] = {
 	/* click                event mask           button          function        argument */
 	#if BAR_STATUSBUTTON_PATCH
-	{ ClkButton,            0,                   Button1,        spawn,          {.v = findercmd } },
+	{ ClkButton,            0,                   Button1,        spawn,          {.v = applaunch } },
 	#endif // BAR_STATUSBUTTON_PATCH
 	{ ClkLtSymbol,          0,                   Button1,        setlayout,      {0} },
 	#if BAR_LAYOUTMENU_PATCH
