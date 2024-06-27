@@ -958,6 +958,8 @@ static const char *emoji[] = { "sh", "-c", "/home/diamond/.config/rofi/emoji/emo
 static const char *bookmarks[] = { "sh", "-c", "/home/diamond/.config/rofi/browser/browser_menu.pl", NULL };
 static const char *powermenu[] = { "sh", "-c", "/home/diamond/.config/rofi/powermenu/powermenu.sh", NULL };
 static const char *applaunch[] = { "sh", "-c", "/home/diamond/.config/rofi/applaunch/launcher.sh", NULL };
+static const char *favlaunch[] = { "perl", "/home/diamond/.config/rofi/fav/fav.pl", NULL };
+static const char *gameslaunch[] = { "perl", "/home/diamond/.config/rofi/fav/games.pl", NULL };
 #if BAR_STATUSCMD_PATCH
 #if BAR_DWMBLOCKS_PATCH
 /* This defines the name of the executable that handles the bar (used for signalling purposes) */
@@ -1481,7 +1483,9 @@ static const Command commands[] = {
 static const Button buttons[] = {
 	/* click                event mask           button          function        argument */
 	#if BAR_STATUSBUTTON_PATCH
-	{ ClkButton,            0,                   Button1,        spawn,          {.v = applaunch } },
+	{ ClkButton,            0,                   Button1,        spawn,          {.v = favlaunch } },
+	{ ClkButton,            0,                   Button2,        spawn,          {.v = applaunch } },
+	{ ClkButton,            0,                   Button3,        spawn,          {.v = gameslaunch } },
 	#endif // BAR_STATUSBUTTON_PATCH
 	{ ClkLtSymbol,          0,                   Button1,        setlayout,      {0} },
 	#if BAR_LAYOUTMENU_PATCH
