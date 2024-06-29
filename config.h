@@ -512,7 +512,6 @@ static const Rule rules[] = {
 	RULE(.wintype = WTYPE "TOOLBAR", .isfloating = 1)
 	RULE(.wintype = WTYPE "SPLASH", .isfloating = 1)
 	RULE(.class = "Event Tester", .isfloating = 1)
-	RULE(.class = "Pavucontrol", .isfloating = 1)
 	RULE(.title = "Library", .isfloating = 1)
 	RULE(.class = "transmission-gtk", .isfloating = 1)
 	RULE(.class = "Xfce4-appfinder", .isfloating = 1)
@@ -551,6 +550,7 @@ static const Rule rules[] = {
 	RULE(.class = "Mousepad", .isfloating = 1)
 	RULE(.class = "control.exe", .isfloating = 1)
 	RULE(.class = "notepad.exe", .isfloating = 1)
+	RULE(.class = "pavucontrol", .isfloating = 1)
 
 	#if RENAMED_SCRATCHPADS_PATCH
 	RULE(.instance = "spterm", .scratchkey = 's', .isfloating = 1)
@@ -939,15 +939,16 @@ static const char *explorer[] = { "thunar", NULL };
 static const char *emacs[] = { "emacsclient", "-c","-n","-a","'emacs'", NULL };
 static const char *mixer[] = { "pavucontrol", NULL };
 static const char *calc[] = { "galculator", NULL };
+static const char *calendar[] = { "/usr/bin/gsimplecal", NULL };
 static const char *mpv[] = { "mpv", "--player-operation-mode=pseudo-gui", NULL };
 static const char *code[] = { "/usr/bin/code", "--unity-launch", "--ignore-gpu-blacklist", "--enable-gpu-rasterization", "--enable-native-gpu-memory-buffers", NULL };
 static const char *spotify[] = { "sh", "/home/diamond/bin/launchspotify.sh", NULL };
-static const char *discord[] = { "/usr/bin/discord", "--ignore-gpu-blocklist", "disable-features=UseOzonePlatform", "--enable-features=VaapiVideoDecoder", "--use-gl=desktop", "--enable-gpu-rasterization", "--enable-zero-copy", "--no-sandbox", NULL };
-static const char *discord_ss[] = { "/usr/bin/flatpak", "run", "--branch=stable", "--arch=x86_64", "--command=discord-screenaudio", "de.shorsh.discord-screenaudio", NULL };
+static const char *discord_standard[] = { "/usr/bin/discord", "--ignore-gpu-blocklist", "disable-features=UseOzonePlatform", "--enable-features=VaapiVideoDecoder", "--use-gl=desktop", "--enable-gpu-rasterization", "--enable-zero-copy", "--no-sandbox", NULL };
+static const char *vencord[] = { "vesktop", NULL };
 static const char *xkill[] = { "xkill", NULL };
 /* static const char *slockcmd[] = { "loginctl lock-session", NULL }; */
-static const char *slockcmd[] = { "slock", NULL };
 /* static const char *slockcmd[] = { "sh", "/home/diamond/bin/slock.sh", NULL }; */
+static const char *slockcmd[] = { "slock", NULL };
 static const char *windowcenter[] = { "sh", "/home/diamond/bin/windowcenter", NULL };
 static const char *toggle_compositor[] = { "sh", "/home/diamond/bin/dwm_tog_comp", NULL };
 static const char *dunst_dismiss[] = { "sh", "/home/diamond/bin/dunst_dismiss", NULL };
@@ -1391,12 +1392,13 @@ static const Key keys[] = {
 	{ Mod4Mask,						XK_space,  spawn,	  	   {.v = roficmd } },
 	{ Mod4Mask|ControlMask,			XK_space,  spawn,	  	   {.v = dunst_dismiss } },
 	{ Mod4Mask|ShiftMask,			XK_space,  spawn,	  	   {.v = dunst_toggle } },
-	{ Mod4Mask,						XK_d,      spawn,	  	   {.v = discord } },
-	{ Mod4Mask|ShiftMask,			XK_d,      spawn,	  	   {.v = discord_ss } },
+	{ Mod4Mask,						XK_d,      spawn,	  	   {.v = vencord } },
+	{ Mod4Mask|ShiftMask,			XK_d,      spawn,	  	   {.v = discord_standard } },
 	{ Mod4Mask,						XK_m,      spawn,	  	   {.v = spotify } },
 	{ Mod4Mask,						XK_v,      spawn,	  	   {.v = code } },
 	{ Mod4Mask|ShiftMask,			XK_v,      spawn,	  	   {.v = mpv } },
 	{ Mod4Mask,						XK_g,      spawn,	  	   {.v = calc } },
+	{ Mod4Mask|ShiftMask,			XK_g,      spawn,	  	   {.v = calendar } },
 	{ MODKEY,						XK_F2,     spawn,	  	   {.v = gmruncmd } },
 	{ MODKEY,						XK_F3,     spawn,	  	   {.v = findercmd } },
 	{ MODKEY|ControlMask,			XK_p,	   spawn,	  	   {.v = mixer } },
