@@ -522,7 +522,8 @@ static const Rule rules[] = {
 	RULE(.class = "Blueman-manager", .isfloating = 1)
 	RULE(.class = "Cheese", .isfloating = 1)
 	/* RULE(.class = "Xfce4-terminal", .isfloating = 1) */
-	/* RULE(.class = "Steam", .isfloating = 1) */
+	RULE(.class = "steam", .isfloating = 1)
+	RULE(.class = "steamwebhelper", .isfloating = 1)
 	RULE(.class = "zoom", .isfloating = 1)
 	RULE(.class = "Gzdoom", .isfloating = 1)
 	RULE(.class = "Tk", .isfloating = 1)
@@ -1382,11 +1383,13 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,           XK_t,	   spawn,          {.v = xfceterm } },
 	{ Mod4Mask,						XK_w,	   spawn,	   	   {.v = web } },
 	{ ControlMask|ShiftMask,		XK_Escape,	   spawn,	   {.v = sysmon } },
+	{ ControlMask,          		XK_Escape,	   spawn,	   {.v = favlaunch } },
+	{ MODKEY|ControlMask,          	XK_Escape,	   spawn,	   {.v = gameslaunch } },
 	{ Mod4Mask|ShiftMask,		    XK_w,	   spawn,	   	   {.v = altweb } },
 	{ 0,							XK_Print,  spawn,	   	   {.v = shot } },
 	{ MODKEY,						XK_Print,  spawn,	   	   {.v = winshot } },
 	{ ShiftMask,	                XK_Print,  spawn,	   	   {.v = selshot } },
-	{ Mod4Mask,                     XK_l,      spawn,          {.v = slockcmd } },
+	{ Mod4Mask|ShiftMask,           XK_l,      spawn,          {.v = slockcmd } },
 	{ Mod4Mask|ShiftMask,			XK_e,      spawn,	  	   {.v = explorer } },
 	{ Mod4Mask,						XK_e,      spawn,	  	   {.v = emacs } },
 	{ Mod4Mask,						XK_space,  spawn,	  	   {.v = roficmd } },
@@ -1410,12 +1413,12 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,           XK_Right,  shiftview,  { .i = +1 } },
 	{ MODKEY|ControlMask,           XK_Left,   shiftview,  { .i = -1 } },
 	{ MODKEY,                       XK_grave,      showhideclient,                {0} },
-	{ MODKEY,                       XK_j,          focusstack,             {.i = +1 } },
-	{ MODKEY,                       XK_k,          focusstack,             {.i = -1 } },
+	{ Mod4Mask,                     XK_j,          focusstack,             {.i = +1 } },
+	{ Mod4Mask,                     XK_k,          focusstack,             {.i = -1 } },
 	{ MODKEY,                       XK_i,          incnmaster,             {.i = +1 } },
 	{ MODKEY,                       XK_d,          incnmaster,             {.i = -1 } },
-	{ MODKEY,                       XK_h,          setmfact,               {.f = -0.05} },
-	{ MODKEY,                       XK_l,          setmfact,               {.f = +0.05} },
+	{ Mod4Mask,                     XK_h,          setmfact,               {.f = -0.05} },
+	{ Mod4Mask,                     XK_l,          setmfact,               {.f = +0.05} },
 	{ Mod4Mask,                     XK_equal,      setmfact,               {.f = 1.50} },
 	{ Mod4Mask|ShiftMask,           XK_equal,      setmfact,               {.f = 1.55} },
 	{ MODKEY,                       XK_Return,     zoom,                   {0} },
